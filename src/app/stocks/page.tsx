@@ -29,7 +29,7 @@ function Paragraphs() {
     <>
       <p>
         Stock trading requires not only a quality broker, but also a strategy
-        that suits your investment goals. Essentra Finance provides optimal
+        that suits your investment goals. Alphabourse provides optimal
         trading conditions and helps you choose the right investment method.{" "}
       </p>
       <p>

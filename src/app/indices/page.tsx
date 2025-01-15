@@ -29,7 +29,7 @@ function Paragraphs() {
   return (
     <>
       <p>
-        Open a trading account with Essentra Finance to gain access to global
+        Open a trading account with Alphabourse to gain access to global
         indices. Our platform offers a wide range of indices from various
         economies, allowing you to select and analyze assets at your discretion.
         Our team of experts is ready to provide assistance and guidance,
@@ -39,7 +39,7 @@ function Paragraphs() {
         Do not limit your investments - open CFD trades on indices of the
         world’s largest giants. This is an excellent way to diversify the
         portfolio and make it more resilient to market fluctuations. Trust
-        Essentra Finance for a variety of features and a quality approach to
+        Alphabourse for a variety of features and a quality approach to
         index trading.
       </p>
     </>

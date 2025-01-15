@@ -22,6 +22,6 @@ export const TESTIMONIES = [
   {
     name: 'Allen White',
     avatar: '/home/allen.jpg',
-    description: 'Professional team who are always ready to help. Service is at the top level, and this greatly singles out Essentra Finance among other brokers.'
+    description: 'Professional team who are always ready to help. Service is at the top level, and this greatly singles out Alphabourse among other brokers.'
   }
 ]

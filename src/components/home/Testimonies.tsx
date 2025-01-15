@@ -15,7 +15,7 @@ export default function Testimonies() {
       <div className={styles["testimonial-bg"]}></div>
       <div className={styles["testimonies-wrapper"]}>
         <h3>Reviews</h3>
-        <h2>What clients think about Essentra Finance</h2>
+        <h2>What clients think about Alphabourse</h2>
         <div className={styles["swiper-wrapper"]}>
           <Swiper
             navigation

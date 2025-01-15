@@ -139,7 +139,7 @@ export default function Home() {
         <div className={clsx("p-10 mt-10", styles["benefits-section"])}>
           <div className={styles["benefits-intro"]}>
             <h3>OUR BENEFITS</h3>
-            <h1>Essentra Finance provides numerous</h1>
+            <h1>Alphabourse provides numerous</h1>
             <h1>opportunities for smart trading</h1>
           </div>
           <div className={styles.benefits}>
@@ -187,7 +187,7 @@ export default function Home() {
         <div className={styles["signup-wrapper"]}>
           <h4>SIGN UP</h4>
           <h1>
-            We are waiting for you at Essentra Finance. Trade with a qualified
+            We are waiting for you at Alphabourse. Trade with a qualified
             broker!
           </h1>
           <button className="light-button-outline">OPEN AN ACCOUNT</button>
