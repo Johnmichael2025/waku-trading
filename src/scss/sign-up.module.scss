@@ -10,7 +10,7 @@
   flex-direction: column;
   padding: 200px;
 
-  .login-form {
+  .signup-form {
     background-color: #191919;
     padding: 40px;
     border-radius: 20px;
@@ -30,7 +30,7 @@
       display: inline-block;
     }
 
-    input, select {
+    input:not([type="checkbox"]), select {
       padding: 20px 20px 20px 20px;
       color: #f2f2f2;
       border-style: solid;
@@ -43,23 +43,6 @@
 
     option {
       color: #191919;
-    }
-  }
-
-  .terms {
-    display: flex;
-    gap: 20px;
-    margin-top: 20px;
-
-    label {
-      font-size: 14px;
-      // max-width: 600px;
-    }
-
-    input {
-      width: 30px;
-      position: relative;
-      top: -15px;
     }
   }
 }

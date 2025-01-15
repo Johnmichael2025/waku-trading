@@ -13,7 +13,8 @@ import safeTyImg from "../../public/home/shield.png";
 import efficiencyImg from "../../public/home/efficiency.png";
 import reliabilityImg from "../../public/home/quality-assurance.png";
 import Testimonies from "../components/home/Testimonies";
-import TradingAssets from "@/shared/TradingAssets";
+import TradingAssets from "../shared/TradingAssets";
+
 library.add(faCheck);
 export default function Home() {
   return (
@@ -164,7 +165,7 @@ export default function Home() {
         <Testimonies />
       </section>
       <section className="my-10 px-10">
-        <TradingAssets />
+        <TradingAssets/>
         {/* <div className="flex justify-around">
           <div>
             <Image width={200} height={40} alt="Quality" src={tradingLogo1} />

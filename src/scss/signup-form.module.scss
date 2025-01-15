@@ -1,0 +1,15 @@
+.terms {
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+
+  label {
+    font-size: 15px!important;
+  }
+
+  input {
+    width: 50px;
+    position: relative;
+    top: -15px;
+  }
+}
