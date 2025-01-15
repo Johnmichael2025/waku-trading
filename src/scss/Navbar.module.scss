@@ -1,0 +1,114 @@
+.sticky-wrapper {
+  position: absolute;
+  width: 100%;
+  transition: all 300ms ease-in-out;
+  z-index: 99;
+  height: 125.833px;
+}
+
+.menu-sticky {
+  margin: 0;
+  width: 100%;
+  z-index: 99;
+  transition: all 300ms ease-in-out;
+  background: transparent;
+
+  .row-table {
+    display: flex;
+    width: 100%;
+    position: relative;
+    align-items: center;
+    padding: 0 30px;
+    justify-content: space-between;
+  }
+
+  .navbar {
+    margin-left: 50px;
+    ul.parent-list {
+      display: flex;
+      gap: 10px;
+
+      & > li {
+        margin-right: 40px;
+
+        & > a {
+          position: relative;
+          margin-right: 10px;
+        }
+
+        a {
+          color: #fff;
+          text-transform: uppercase;
+          font-size: 18px;
+        }
+
+        .sub-menu {
+          background: radial-gradient(
+            100.15% 191.04% at 15.32% 0%,
+            #171717 0%,
+            #101010 66.17%
+          );
+          position: absolute;
+          visibility: hidden;
+          transform: scaleY(0);
+          transform-origin: 0 0 0;
+          opacity: 0;
+          transition: all 0.4s ease-in-out;
+          min-width: 250px;
+          padding: 30px;
+          margin-top: 20px;
+          border-radius: 10px;
+          box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+          li {
+            margin-bottom: 15px;
+
+            a {
+              color: #fff;
+              text-transform: initial;
+              font-size: 16px;
+            }
+          }
+        }
+
+        &:hover .sub-menu {
+          opacity: 1;
+          transform: scaleY(1);
+          visibility: visible;
+        }
+
+        &.parent-item > a::after {
+          content: "+";
+          position: absolute;
+          right: -20px;
+          top: -2px;
+          text-align: center;
+          z-index: 9999;
+          display: block;
+          cursor: pointer;
+          transition: all 0.5s ease;
+          font-weight: 400;
+          color: #fff;
+        }
+
+        &.parent-item:hover > a::after {
+          content: "";
+          position: absolute;
+          right: -20px;
+          top: 50%;
+          width: 9px;
+          height: 1px;
+          text-align: center;
+          z-index: 9999;
+          display: block;
+          cursor: pointer;
+          background: #fff;
+          transition: all 0.5s ease;
+          transform: translateY(-50%);
+          font-weight: 400;
+          color: #fff;
+        }
+      }
+    }
+  }
+}

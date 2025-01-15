@@ -1,0 +1,139 @@
+.image-text-section {
+  padding: 80px;
+  h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+  }
+
+  p {
+    color: #585555;
+    font-size: 17px;
+    line-height: 30px;
+    margin-top: 20px;
+  }
+
+  button {
+    padding: 12px 29px 12px 29px;
+    font-size: 16px;
+    font-weight: 400;
+    text-transform: uppercase;
+    background-color: rgba(16, 110, 234, 0);
+    border-style: solid;
+    border-color: var(--dark-blue);
+    border-radius: 4px 4px 4px 4px;
+    color: #ffffff;
+    background-color: var(--dark-blue);
+    margin-top: 20px;
+  }
+}
+
+.best-term {
+  background: radial-gradient(
+    100.15% 191.04% at 15.32% 0%,
+    #171717 0%,
+    #101010 66.17%
+  );
+  opacity: 0.9;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 30px;
+  width: 32%;
+  background-position: center center;
+  background-size: cover;
+  min-height: 300px;
+  border-radius: 3px;
+
+  &:hover.term-1 {
+    background-image: url("/platform/leverage.jpg");
+  }
+  &:hover.term-2 {
+    background-image: url("/platform/commissions.jpg");
+  }
+  &:hover.term-3 {
+    background-image: url("/platform/accounts.jpg");
+  }
+  &:hover.term-4 {
+    background-image: url("/platform/strategies.jpg");
+  }
+  &:hover.term-5 {
+    background-image: url("/platform/replenishment.jpg");
+  }
+  &:hover.term-6 {
+    background-image: url("/platform/support.jpg");
+  }
+
+  h2 {
+    color: #fff;
+    font-size: 1.4rem;
+    cursor: pointer;
+  }
+
+  p {
+    color: #fff;
+    margin-top: 20px;
+  }
+
+  svg {
+    width: 40px;
+    height: 40px;
+    color: white;
+  }
+}
+
+.market-analysis {
+  display: flex;
+
+  .background-area {
+    background-image: url(https://essentrafinance.com/wp-content/uploads/2023/12/home-5-abt-bg-1.jpg);
+    background-position: top center;
+    background-size: cover;
+    width: 35%;
+    display: flex;
+    padding: 60px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    p {
+      line-height: 30px;
+    }
+
+    h1,
+    p {
+      color: #fff;
+    }
+  }
+  .trading-widget-wrapper {
+    width: 65%;
+    padding: 60px;
+    background: radial-gradient(
+      100.15% 191.04% at 15.32% 0%,
+      #171717 0%,
+      #101010 66.17%
+    );
+    opacity: 0.9;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+    & > div {
+      padding: 60px;
+      background-color: #fff;
+      border-radius: 10px;
+    }
+  }
+}
+
+.faq-wrapper {
+  padding: 80px;
+
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+}

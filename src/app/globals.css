@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --dark-blue: #334155;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.tradingview-widget-container {
+  height: 500px !important;
+}
+
+h1, h2, h3 {
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.light-button-outline {
+  padding: 11px 28px 11px 28px;
+  font-size: 16px;
+  font-weight: 400;
+  text-transform: uppercase;
+  background-color: rgba(16, 110, 234, 0);
+  border-style: solid;
+  border-width: 2px 2px 2px 2px;
+  border-color: #ffffff;
+  border-radius: 4px 4px 4px 4px;
+  color: #fff;
+  margin-top: 20px;
+  &:hover {
+    background-color: var(--dark-blue);
+  }
+}

@@ -1,0 +1,35 @@
+.wrapper > h1 {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 50px;
+}
+
+.market {
+  background-color: var(--dark-blue);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  flex: 1;
+  padding: 50px;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: background 0.8s;
+  background-position: center center;
+  background-size: cover;
+
+  h1 {
+    color: #fff;
+    font-size: 1.5rem;
+  }
+
+  a {
+    margin-top: 20px;
+    svg {
+      width: 40px;
+      height: 40px;
+      color: white;
+    }
+  }
+}
