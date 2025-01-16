@@ -8,10 +8,10 @@ export async function contact(formData: FormData) {
 
   try {
     const { data, error } = await resend.emails.send({
-      from: email,
-      to: ['jovenlin28@gmail.com'],
+      from: 'Acme <onboarding@resend.dev>',
+      to: 'johnnymicheal021@gmail.com',
       subject: 'Contact Customer Service',
-      react: EmailTemplate({ name, message }),
+      html: '<p>Test</p>'
     });
     console.log(data, 'data');
     if (error) {
