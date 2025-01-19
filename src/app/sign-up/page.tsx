@@ -1,4 +1,3 @@
-"use client";
 import React from "react";
 import styles from "../../scss/sign-up.module.scss";
 import SignupForm from "@/components/SignupForm";

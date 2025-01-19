@@ -4,19 +4,31 @@ import styles from "../scss/signup-form.module.scss";
 import { COUNTRIES } from "@/constants/countries.constant";
 import Link from "next/link";
 import { signup } from "@/actions/signup";
+import { useRouter } from "next/navigation";
+import { LoginCredential } from "@/models/LoginCredential";
+import { login } from "@/actions/login";
 
 export default function SignupForm() {
+  const router = useRouter();
   const [signupError, setSignupError] = useState("");
-  const onSignup = (form: FormData) => {
-    console.log(form, "form");
+  const [pending, setPending] = useState(false);
+  const onSignup = async (form: FormData) => {
+    setPending(true);
     setSignupError("");
-    signup(form).then((res) => {
-      console.log(res, "res");
-      if (res.success) {
-      } else {
-        setSignupError(res.message);
+    const res = await signup(form);
+    if (!res.success) {
+      setSignupError(res.message);
+    } else {
+      const cred = {
+        email: form.get("email"),
+        password: form.get("password"),
+      } as LoginCredential;
+      const loginRes = await login(cred);
+      setPending(false);
+      if (loginRes?.ok) {
+        router.push("/dashboard");
       }
-    });
+    }
   };
   return (
     <form action={onSignup}>
@@ -78,7 +90,9 @@ export default function SignupForm() {
           </div>
         </div>
       </div>
-      {signupError && <p className="text-center text-red-600 my-5">{signupError}</p>}
+      {signupError && (
+        <p className="text-center text-red-600 my-5">{signupError}</p>
+      )}
       <div className={styles.terms}>
         <input required name="terms" type="checkbox" />
         <label htmlFor="terms">
@@ -89,8 +103,12 @@ export default function SignupForm() {
         </label>
       </div>
       <div className="text-center">
-        <button type="submit" className="light-button-outline">
-          Sign Up
+        <button
+          disabled={pending}
+          type="submit"
+          className="light-button-outline"
+        >
+          {pending ? "Loading..." : "Sign up"}
         </button>
       </div>
       <h4 className="text-center mt-6">

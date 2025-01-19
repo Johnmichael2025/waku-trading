@@ -79,12 +79,12 @@ export const NAV_ITEMS = [
       }
     ]
   },
-  {
-    label: 'Sign in',
-    link: '/login',
-  },
-  {
-    label: 'Sign Up',
-    link: '/sign-up',
-  }
+  // {
+  //   label: 'Sign in',
+  //   link: '/login',
+  // },
+  // {
+  //   label: 'Sign Up',
+  //   link: '/sign-up',
+  // }
 ]

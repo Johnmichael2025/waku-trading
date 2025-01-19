@@ -1,20 +1,25 @@
 "use client";
 import { login } from "@/actions/login";
+import { LoginCredential } from "@/models/LoginCredential";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 export default function LoginForm() {
+  const [pending, setPending] = useState(false);
   const [loginError, setLoginError] = useState("");
+  const router = useRouter();
   const onLogin = (form: FormData) => {
-    setLoginError('');
-    login(form).then((res) => {
-      console.log(res, "res");
-      if (res.success) {
-        // showToast("Write a Review", res.message, "success");
-        // onSubmitSuccess();
+    const cred = { email: form.get("email"), password: form.get("password") } as LoginCredential;
+    setLoginError("");
+    setPending(true);
+    login(cred).then((res) => {
+      if (res?.ok) {
+        router.push("/dashboard");
       } else {
-        setLoginError(res.message);
+        setLoginError(res?.error || "");
       }
+      setPending(false);
     });
   };
   return (
@@ -39,10 +44,16 @@ export default function LoginForm() {
           />
         </div>
       </div>
-      {loginError && <p className="text-center text-red-600 mt-5">{loginError}</p>}
+      {loginError && (
+        <p className="text-center text-red-600 mt-5">{loginError}</p>
+      )}
       <div className="text-center mt-4">
-        <button type="submit" className="light-button-outline">
-          LOGIN
+        <button
+          disabled={pending}
+          type="submit"
+          className="light-button-outline"
+        >
+          {pending ? "Loading..." : "LOGIN"}
         </button>
       </div>
 
