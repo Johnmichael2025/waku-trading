@@ -1,0 +1,7 @@
+.sidebar {
+  background: radial-gradient(100.15% 191.04% at 15.32% 0%, #171717 0%, #101010 66.17%);
+
+  & > div {
+    background: radial-gradient(100.15% 191.04% at 15.32% 0%, #171717 0%, #101010 66.17%);
+  }
+}

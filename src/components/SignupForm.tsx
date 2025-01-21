@@ -26,7 +26,7 @@ export default function SignupForm() {
       const loginRes = await login(cred);
       setPending(false);
       if (loginRes?.ok) {
-        router.push("/dashboard");
+        router.push("/client-portal");
       }
     }
   };

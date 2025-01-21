@@ -22,4 +22,15 @@ model User {
   password String
   country String
   phone String
+  tradingAccounts TradingAccount[]
+}
+
+model TradingAccount {
+  id Int  @id @default(autoincrement())
+  balance Float
+  credit Float
+  user User @relation(fields: [userId], references: [id])
+  userId Int
+  server String?
+  leverage String?
 }

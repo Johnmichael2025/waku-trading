@@ -2,8 +2,8 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getToken } from 'next-auth/jwt'
 
 // 1. Specify protected and public routes
-const protectedRoutes = ['/dashboard']
-const publicRoutes = ['/login', '/sign-up', '/']
+const protectedRoutes = ['/client-portal']
+const publicRoutes = ['/login', '/sign-up']
 
 export default async function middleware(req: NextRequest) {
   // 2. Check if the current route is protected or public
@@ -25,9 +25,9 @@ export default async function middleware(req: NextRequest) {
   if (
     isPublicRoute &&
     token &&
-    !req.nextUrl.pathname.startsWith('/dashboard')
+    !req.nextUrl.pathname.startsWith('/client-portal')
   ) {
-    return NextResponse.redirect(new URL('/dashboard', req.nextUrl))
+    return NextResponse.redirect(new URL('/client-portal', req.nextUrl))
   }
 
   return NextResponse.next()

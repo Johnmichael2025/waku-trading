@@ -15,7 +15,7 @@ export default function LoginForm() {
     setPending(true);
     login(cred).then((res) => {
       if (res?.ok) {
-        router.push("/dashboard");
+        router.push("/client-portal");
       } else {
         setLoginError(res?.error || "");
       }
