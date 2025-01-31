@@ -15,15 +15,15 @@ export default function Dashboard() {
       {user && (
         <div className="flex flex-row justify-between">
           <div className="flex flex-col w-[60%]">
-            <Tabs aria-label="Options">
+            <Tabs color="primary" variant="bordered" aria-label="Options">
               <Tab key="deposit" title="Deposit">
-                <Deposit userId={user.id} tradingAccounts={tradingAccounts} />
+                <Deposit user={user} tradingAccounts={tradingAccounts} />
               </Tab>
               <Tab key="transfer-funds" title="Transfer funds">
-                <TransferFunds userId={user.id} tradingAccounts={tradingAccounts} />
+                <TransferFunds user={user} tradingAccounts={tradingAccounts} />
               </Tab>
               <Tab key="withdraw" title="Withdraw">
-                <Withdraw userId={user.id} tradingAccounts={tradingAccounts} />
+                <Withdraw user={user} tradingAccounts={tradingAccounts} />
               </Tab>
             </Tabs>
           </div>
@@ -33,7 +33,9 @@ export default function Dashboard() {
                 <strong>Amount</strong>: 0.00 USD
               </div>
               <div>
-                <Link className="text-blue-500" href="/client-portal/trading">View trading accounts</Link>
+                <Link className="text-blue-500" href="/client-portal/trading">
+                  View trading accounts
+                </Link>
               </div>
             </div>
           </div>

@@ -12,7 +12,7 @@ export default function Profile() {
   return (
     <>
       {user && (
-        <Tabs aria-label="Options">
+        <Tabs color="primary" variant="bordered" aria-label="Options">
           <Tab key="personal-info" title="Personal Info">
             <PersonalInfo user={user} />
           </Tab>

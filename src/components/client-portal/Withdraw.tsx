@@ -2,20 +2,22 @@ import { createTransaction } from "@/actions/transaction";
 import { TRANSACTION_TYPE } from "@/enums/transaction-type.enum";
 import { TradingAccount } from "@/models/trading-account.model";
 import { Transaction } from "@/models/transaction.model";
+import { User } from "@/models/user.model";
 import { UserContext } from "@/providers/context";
 import { Button, Input, Select, SelectItem } from "@heroui/react";
 import React, { useActionState, useContext, useEffect } from "react";
+import { ToastContainer, toast } from 'react-toastify';
 
 type WithdrawProps = {
   tradingAccounts: TradingAccount[];
-  userId: number;
+  user: User;
 };
 const initialState = {
   success: false,
   message: "",
   data: null,
 };
-export default function Withdraw({ tradingAccounts, userId }: WithdrawProps) {
+export default function Withdraw({ tradingAccounts, user }: WithdrawProps) {
   const [state, formAction, pending] = useActionState(
     createTransaction,
     initialState
@@ -24,6 +26,7 @@ export default function Withdraw({ tradingAccounts, userId }: WithdrawProps) {
 
   useEffect(() => {
     if (state.success) {
+      toast.success(state.message);
       addTransaction(state.data as unknown as Transaction);
     }
   }, [state, addTransaction]);
@@ -39,7 +42,9 @@ export default function Withdraw({ tradingAccounts, userId }: WithdrawProps) {
       <h3 className="mt-4 mb-4">Total deductions request</h3>
 
       <form action={formAction}>
-        <input type="hidden" name="user-id" value={userId} />
+        <input type="hidden" name="user-id" value={user?.id} />
+        <input type="hidden" name="user-name" value={`${user.firstName} ${user.lastName}`} />
+        <input type="hidden" name="user-email" value={user?.email} />
         <input
           type="hidden"
           name="transaction-type"
@@ -98,11 +103,12 @@ export default function Withdraw({ tradingAccounts, userId }: WithdrawProps) {
               className="min-w-[400px]"
               color="default"
             >
-              Deposit
+              Withdraw
             </Button>
           </div>
         </div>
       </form>
+      <ToastContainer />
     </>
   );
 }

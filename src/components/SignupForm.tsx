@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useActionState, useEffect, useState } from "react";
 import styles from "../scss/signup-form.module.scss";
 import { COUNTRIES } from "@/constants/countries.constant";
 import Link from "next/link";
@@ -7,31 +7,40 @@ import { signup } from "@/actions/signup";
 import { useRouter } from "next/navigation";
 import { LoginCredential } from "@/models/login-credential.model";
 import { login } from "@/actions/login";
+import { User } from "@/models/user.model";
+import { Button } from "@heroui/react";
 
+const initialState = {
+  success: false,
+  message: "",
+  data: null,
+};
 export default function SignupForm() {
+  const [state, formAction, pending] = useActionState(signup, initialState);
   const router = useRouter();
   const [signupError, setSignupError] = useState("");
-  const [pending, setPending] = useState(false);
-  const onSignup = async (form: FormData) => {
-    setPending(true);
-    setSignupError("");
-    const res = await signup(form);
-    if (!res.success) {
-      setSignupError(res.message);
-    } else {
-      const cred = {
-        email: form.get("email"),
-        password: form.get("password"),
-      } as LoginCredential;
-      const loginRes = await login(cred);
-      setPending(false);
-      if (loginRes?.ok) {
-        router.push("/client-portal");
+
+  useEffect(() => {
+    const onSignUp = async() => {
+      if (state.success) {
+        const data = state.data as unknown as User;
+        const cred = {
+          email: data.email,
+          password: data.password,
+        } as LoginCredential;
+        const loginRes = await login(cred);
+        if (loginRes?.ok) {
+          router.push("/client-portal");
+        }
+      } else if (state.message) {
+        setSignupError(state.message);
       }
-    }
-  };
+    };
+    onSignUp();
+  }, [router, state]);
+
   return (
-    <form action={onSignup}>
+    <form action={formAction}>
       <div className="flex flex-col gap-6">
         <div className="flex gap-4">
           <div className="flex-1">
@@ -103,13 +112,13 @@ export default function SignupForm() {
         </label>
       </div>
       <div className="text-center">
-        <button
-          disabled={pending}
+        <Button
+          isLoading={pending}
           type="submit"
           className="light-button-outline"
         >
           {pending ? "Loading..." : "Sign up"}
-        </button>
+        </Button>
       </div>
       <h4 className="text-center mt-6">
         Already registered? &nbsp;<Link href="/login">Log in</Link>

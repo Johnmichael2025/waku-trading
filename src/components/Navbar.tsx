@@ -11,7 +11,6 @@ import clsx from "clsx";
 
 export default function Navbar() {
   const pathname = usePathname();
-  console.log(pathname, "name");
   const session = useSession();
   const status = session?.status;
 

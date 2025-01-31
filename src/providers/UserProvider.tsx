@@ -20,9 +20,15 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
 
   const addTransaction = (transaction: Transaction) => {
     setState((prev) => {
+      const _transaction = {
+        ...transaction,
+        tradingAccount: prev.tradingAccounts.find(
+          (account) => account.id === transaction.tradingAccountId
+        ),
+      } as Transaction;
       return {
         ...prev,
-        transactions: [...prev.transactions, transaction],
+        transactions: [...prev.transactions, _transaction],
       };
     });
   };

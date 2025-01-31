@@ -12,6 +12,7 @@ export interface Transaction {
   amount: number 
   user: User
   tradingAccount: TradingAccount
+  tradingAccountId?: number
   transferToAccountId?: number
   dateCreated: string
 }

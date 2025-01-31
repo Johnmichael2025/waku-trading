@@ -2,13 +2,15 @@ import { createTransaction } from "@/actions/transaction";
 import { TRANSACTION_TYPE } from "@/enums/transaction-type.enum";
 import { TradingAccount } from "@/models/trading-account.model";
 import { Transaction } from "@/models/transaction.model";
+import { User } from "@/models/user.model";
 import { UserContext } from "@/providers/context";
 import { Button, Chip, Input, Select, SelectItem } from "@heroui/react";
 import React, { useActionState, useContext, useEffect, useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
 
 type TransferFundsProps = {
   tradingAccounts: TradingAccount[];
-  userId: number;
+  user: User;
 };
 
 const initialState = {
@@ -18,7 +20,7 @@ const initialState = {
 };
 export default function TransferFunds({
   tradingAccounts,
-  userId,
+  user,
 }: TransferFundsProps) {
   const [state, formAction, pending] = useActionState(
     createTransaction,
@@ -35,6 +37,7 @@ export default function TransferFunds({
 
   useEffect(() => {
     if (state.success) {
+      toast.success(state.message);
       addTransaction(state.data as unknown as Transaction);
     }
   }, [state, addTransaction]);
@@ -49,7 +52,13 @@ export default function TransferFunds({
       <h3 className="mt-4 mb-4">Transfer funds</h3>
 
       <form action={formAction}>
-        <input type="hidden" name="user-id" value={userId} />
+        <input type="hidden" name="user-id" value={user?.id} />
+        <input
+          type="hidden"
+          name="user-name"
+          value={`${user.firstName} ${user.lastName}`}
+        />
+        <input type="hidden" name="user-email" value={user?.email} />
         <input
           type="hidden"
           name="transaction-type"
@@ -150,6 +159,7 @@ export default function TransferFunds({
           </div>
         </div>
       </form>
+      <ToastContainer />
     </>
   );
 }

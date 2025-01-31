@@ -1,6 +1,7 @@
 "use client";
 import { login } from "@/actions/login";
 import { LoginCredential } from "@/models/login-credential.model";
+import { Button } from "@heroui/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
@@ -48,13 +49,13 @@ export default function LoginForm() {
         <p className="text-center text-red-600 mt-5">{loginError}</p>
       )}
       <div className="text-center mt-4">
-        <button
-          disabled={pending}
+        <Button
+          isLoading={pending}
           type="submit"
           className="light-button-outline"
         >
-          {pending ? "Loading..." : "LOGIN"}
-        </button>
+          LOGIN
+        </Button>
       </div>
 
       <div className="flex justify-between mt-6">

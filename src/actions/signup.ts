@@ -1,9 +1,10 @@
 'use server';
 
+import { ActionStateResponse } from "@/models/action-state-response.model";
 import prisma from "../lib/prisma";
 import bcrypt from 'bcrypt';
 
-export async function signup(formData: FormData) {
+export async function signup(previousState: ActionStateResponse, formData: FormData) {
   const email = formData.get('email') as string;
   const firstName = formData.get('firstName') as string;
   const lastName = formData.get('lastName') as string;
@@ -31,9 +32,9 @@ export async function signup(formData: FormData) {
         password: hashedPassword
       },
     });
-    return { success: true, message: 'Signup successful. Please verify your email.' };
+    return { success: true, message: 'Signup successful. Please verify your email.', data: {email, password} };
   } catch (err) {
     console.log(err, 'err signing up');
-    return { success: false, message:  (err as {message: string}).message };
+    return { success: false, message:  (err as {message: string}).message, data: null };
   }
 }
