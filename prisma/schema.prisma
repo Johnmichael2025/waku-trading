@@ -23,14 +23,32 @@ model User {
   country String
   phone String
   tradingAccounts TradingAccount[]
+  transactions Transaction[]
 }
 
 model TradingAccount {
   id Int  @id @default(autoincrement())
+  name String
+  currency String
   balance Float
   credit Float
   user User @relation(fields: [userId], references: [id])
   userId Int
   server String?
   leverage String?
+  transactions Transaction[]
+}
+
+model Transaction {
+  id Int  @id @default(autoincrement()) 
+  transactionType String 
+  status String 
+  withdrawalType String?
+  amount Float
+  user User @relation(fields: [userId], references: [id])
+  userId Int
+  tradingAccount TradingAccount @relation(fields: [tradingAccountId], references: [id])
+  tradingAccountId Int
+  transferToAccountId Int?
+  dateCreated String
 }

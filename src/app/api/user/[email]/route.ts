@@ -1,18 +1,21 @@
 import prisma from "@/lib/prisma";
-import { User } from "@/models/User";
 import { NextResponse } from "next/server";
 
-export async function GET(request: Request, { params }: { params: { email: string } }) {
-  const email = params.email;
+export async function GET(request: Request, {params}: {params: Promise<{ email: string }>}) {
+  const email = (await params).email;
 
   try {
-    let user: User | null = null;
-    user = await prisma.user.findUnique({
+    const user = await prisma.user.findUnique({
       where: {
         email,
       },
       include: {
-        tradingAccounts: true
+        tradingAccounts: true,
+        transactions: {
+          include: {
+            tradingAccount: true
+          }
+        }
       }
     });
     return NextResponse.json(user);

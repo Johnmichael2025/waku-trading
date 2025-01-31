@@ -5,7 +5,7 @@ import { COUNTRIES } from "@/constants/countries.constant";
 import Link from "next/link";
 import { signup } from "@/actions/signup";
 import { useRouter } from "next/navigation";
-import { LoginCredential } from "@/models/LoginCredential";
+import { LoginCredential } from "@/models/login-credential.model";
 import { login } from "@/actions/login";
 
 export default function SignupForm() {

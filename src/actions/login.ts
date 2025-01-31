@@ -1,6 +1,6 @@
 
 
-import { LoginCredential } from "@/models/LoginCredential";
+import { LoginCredential } from "@/models/login-credential.model";
 import { signIn } from "next-auth/react";
 
 export async function login(cred: LoginCredential) {

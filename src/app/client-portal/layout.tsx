@@ -8,9 +8,9 @@ export default function ClientPortalLayout({
 }>) {
   return (
     <>
+      <ClientPortalNavigation />
       <UserProvider>
-        <ClientPortalNavigation />
-        <div className="md:ml-[270px] md:pt-[150px] p-6">{children}</div>
+        <div className="md:ml-[270px] md:pt-[150px] p-10">{children}</div>
       </UserProvider>
     </>
   );

@@ -1,6 +1,6 @@
 "use client";
 import { login } from "@/actions/login";
-import { LoginCredential } from "@/models/LoginCredential";
+import { LoginCredential } from "@/models/login-credential.model";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";

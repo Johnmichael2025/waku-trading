@@ -1,0 +1,40 @@
+.select {
+  :global {
+    button {
+      height: 40px!important;
+      min-height: 40px!important;
+
+      label {
+        display: none;
+      }
+
+      & label + div {
+        padding-top: 0 !important;
+      }
+    }
+    
+  }
+}
+
+.account-validation-wrapper {
+  p {
+    margin-top: 15px;
+    font-size: 15px;
+    width: 80%;
+  }
+  h4 {
+    font-weight: 600;
+    font-size: 14px;
+    margin-top: 15px;
+  }
+  ul {
+    list-style: initial!important;
+    list-style-type: initial!important;
+    padding: 20px;
+
+    li {
+      margin-top: 10px;
+      font-size: 15px;
+    }
+  }
+}

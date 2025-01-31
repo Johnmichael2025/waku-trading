@@ -8,8 +8,8 @@ export async function contact(formData: FormData) {
 
   try {
     const { data, error } = await resend.emails.send({
-      from: email,
-      to: ['jovenlin28@gmail.com'],
+      from: 'admin@alfabourse.com',
+      to: ['admin@alfabourse.com'],
       subject: 'Contact Customer Service',
       react: EmailTemplate({ name, message, email }),
     });

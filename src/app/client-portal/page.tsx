@@ -1,33 +1,44 @@
 "use client";
-import { useSession } from "next-auth/react";
-import {Tabs, Tab} from "@heroui/react";
-import { useRouter } from "next/navigation";
+import { Tabs, Tab } from "@heroui/react";
 import React, { useContext } from "react";
 import Deposit from "@/components/client-portal/Deposit";
 import TransferFunds from "@/components/client-portal/TransferFunds";
 import Withdraw from "@/components/client-portal/Withdraw";
 import { UserContext } from "@/providers/context";
+import Link from "next/link";
 
 export default function Dashboard() {
-  const session = useSession();
-  const status = session?.status;
-  const router = useRouter();
-  const user = useContext(UserContext);
-  console.log(user, 'user context');
+  const { user, tradingAccounts } = useContext(UserContext);
 
   return (
-    <div className="flex w-full flex-col">
-      <Tabs aria-label="Options">
-        <Tab key="deposit" title="Deposit">
-          <Deposit />
-        </Tab>
-        <Tab key="transfer-funds" title="Transfer funds">
-          <TransferFunds />
-        </Tab>
-        <Tab key="withdraw" title="Withdraw">
-          <Withdraw />
-        </Tab>
-      </Tabs>
-    </div>
+    <>
+      {user && (
+        <div className="flex flex-row justify-between">
+          <div className="flex flex-col w-[60%]">
+            <Tabs aria-label="Options">
+              <Tab key="deposit" title="Deposit">
+                <Deposit userId={user.id} tradingAccounts={tradingAccounts} />
+              </Tab>
+              <Tab key="transfer-funds" title="Transfer funds">
+                <TransferFunds userId={user.id} tradingAccounts={tradingAccounts} />
+              </Tab>
+              <Tab key="withdraw" title="Withdraw">
+                <Withdraw userId={user.id} tradingAccounts={tradingAccounts} />
+              </Tab>
+            </Tabs>
+          </div>
+          <div className="flex-1 w-[40%]">
+            <div className="flex bg-gray-200 justify-between p-4 rounded-sm">
+              <div>
+                <strong>Amount</strong>: 0.00 USD
+              </div>
+              <div>
+                <Link className="text-blue-500" href="/client-portal/trading">View trading accounts</Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 }

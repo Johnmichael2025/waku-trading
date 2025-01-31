@@ -1,48 +1,52 @@
 import React from "react";
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Divider,
-  Button,
-} from "@heroui/react";
+import { Card, CardHeader, CardBody, CardFooter, Button } from "@heroui/react";
+import { TradingAccount } from "@/models/trading-account.model";
+import Link from "next/link";
 
-export default function TradingAccounts() {
+type TradingAccountsProps = {
+  accounts: TradingAccount[];
+};
+export default function TradingAccounts({ accounts }: TradingAccountsProps) {
   return (
     <>
-      <h3 className="text-medium">Trading Accounts</h3>
-      <div className="mt-4">
+      <h3 className="text-medium mt-4">Trading Accounts</h3>
+      {/* <div className="mt-4">
         <Button className="min-w-[300px]" color="primary">
           Create Trading account
         </Button>
-      </div>
+      </div> */}
       <div className="flex flex-row flex-wrap gap-4">
-        {[1, 2].map((account) => (
+        {accounts.map((account) => (
           <Card
-            key={account}
+            key={account.id}
             className="max-w-[400px] bg-green text-white p-4 mt-6"
           >
             <CardHeader className="flex gap-3 rounded-sm">
-              <h3>Test Account</h3>
+              <h3>{account.name}</h3>
             </CardHeader>
             <CardBody>
               <div className="flex flex-col gap-4">
                 <div className="flex justify-between">
                   <span className="text-sm font-light">Sign in</span>
-                  <span className="text-sm font-medium">2180389</span>
+                  <span className="text-sm font-medium">{account.id}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-sm font-light">Total balance</span>
-                  <span className="text-sm font-medium">0.00 USD</span>
+                  <span className="text-sm font-medium">
+                    {account.balance} USD
+                  </span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-sm font-light">Credit</span>
-                  <span className="text-sm font-medium">0.00 USD</span>
+                  <span className="text-sm font-medium">
+                    {account.credit} USD
+                  </span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-sm font-light">Leverage</span>
-                  <span className="text-sm font-medium">1:100</span>
+                  <span className="text-sm font-medium">
+                    {account.leverage}
+                  </span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-sm font-light">Server</span>
@@ -51,9 +55,11 @@ export default function TradingAccounts() {
               </div>
             </CardBody>
             <CardFooter>
-              <Button className="min-w-[350px]" color="default">
-                Deposit
-              </Button>
+              <Link href="/client-portal">
+                <Button className="min-w-[350px]" color="default">
+                  Deposit
+                </Button>
+              </Link>
             </CardFooter>
           </Card>
         ))}
