@@ -14,6 +14,7 @@ import efficiencyImg from "../../public/home/efficiency.png";
 import reliabilityImg from "../../public/home/quality-assurance.png";
 import Testimonies from "../components/home/Testimonies";
 import TradingAssets from "../shared/TradingAssets";
+import Link from "next/link";
 
 library.add(faCheck);
 export default function Home() {
@@ -26,7 +27,9 @@ export default function Home() {
             <h1>WE STRIVE FOR</h1>
             <h1>PRODUCTIVE</h1>
             <h1>INVESTMENT</h1>
-            <button className="light-button-outline">SIGN UP NOW</button>
+            <Link href="/sign-up">
+              <button className="light-button-outline">SIGN UP NOW</button>
+            </Link>
           </div>
         </div>
       </section>
@@ -165,24 +168,7 @@ export default function Home() {
         <Testimonies />
       </section>
       <section className="my-10 px-10">
-        <TradingAssets/>
-        {/* <div className="flex justify-around">
-          <div>
-            <Image width={200} height={40} alt="Quality" src={tradingLogo1} />
-          </div>
-          <div>
-            <Image width={200} height={40} alt="Quality" src={tradingLogo2} />
-          </div>
-          <div>
-            <Image width={200} height={40} alt="Quality" src={tradingLogo3} />
-          </div>
-          <div>
-            <Image width={200} height={40} alt="Quality" src={tradingLogo4} />
-          </div>
-          <div>
-            <Image width={200} height={40} alt="Quality" src={tradingLogo5} />
-          </div>
-        </div> */}
+        <TradingAssets />
       </section>
       <section>
         <div className={styles["signup-wrapper"]}>
@@ -191,7 +177,9 @@ export default function Home() {
             We are waiting for you at Alphabourse. Trade with a qualified
             broker!
           </h1>
-          <button className="light-button-outline">OPEN AN ACCOUNT</button>
+          <Link href="/sign-up">
+            <button className="light-button-outline">OPEN AN ACCOUNT</button>
+          </Link>
         </div>
       </section>
     </>
