@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./../scss/Navbar.module.scss";
 import logoImg from "../../public/logo.webp";
 import { NAV_ITEMS } from "../constants/nav-items.constant";
@@ -13,6 +13,19 @@ export default function Navbar() {
   const pathname = usePathname();
   const session = useSession();
   const status = session?.status;
+  const [stickyNav, setStickyNav] = useState<boolean>(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setStickyNav(window.pageYOffset > 105 ? true : false);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const onLogout = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
@@ -24,7 +37,7 @@ export default function Navbar() {
       {!pathname?.includes("clienwwt") && (
         <div
           style={{ left: pathname?.includes("client-portal") ? "270px" : 0 }}
-          className={styles["sticky-wrapper"]}
+          className={clsx(styles["sticky-wrapper"], stickyNav ? styles.sticky : '')}
         >
           <div
             style={{
