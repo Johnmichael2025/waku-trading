@@ -9,7 +9,7 @@ import { usePathname } from 'next/navigation'
 
 export default function ClientPortalNavigation() {
   const pathname = usePathname();
-  console.log(pathname, 'pathname');
+
   return (
     <aside
       id="logo-sidebar"

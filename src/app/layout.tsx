@@ -4,7 +4,6 @@ import "./globals.css";
 import Navbar from "./../components/Navbar";
 import Footer from "./../components/Footer";
 import { AuthProvider } from "./AuthProvider";
-import SociaMediaFloatingIcons from "@/components/SociaMediaFloatingIcons";
 
 const openSans = Open_Sans({
   subsets: ["latin"],
@@ -38,7 +37,6 @@ export default function RootLayout({
           <Navbar />
           {children}
           <Footer />
-          <SociaMediaFloatingIcons />
         </AuthProvider>
       </body>
     </html>
