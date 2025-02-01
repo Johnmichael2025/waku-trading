@@ -4,11 +4,12 @@ import "./globals.css";
 import Navbar from "./../components/Navbar";
 import Footer from "./../components/Footer";
 import { AuthProvider } from "./AuthProvider";
+import SociaMediaFloatingIcons from "@/components/SociaMediaFloatingIcons";
 
 const openSans = Open_Sans({
-  subsets: ['latin'],
-  display: 'swap',
-})
+  subsets: ["latin"],
+  display: "swap",
+});
 
 // const roboto = Roboto({
 //   weight: '400',
@@ -32,13 +33,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${openSans.className} antialiased`}
-      >
+      <body className={`${openSans.className} antialiased`}>
         <AuthProvider>
           <Navbar />
           {children}
           <Footer />
+          <SociaMediaFloatingIcons />
         </AuthProvider>
       </body>
     </html>
