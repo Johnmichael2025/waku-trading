@@ -5,11 +5,6 @@ export const CLIENT_PORTAL_NAVIGATION = [
     icon: 'finance.png'
   },
   {
-    label: 'Web Trader',
-    link: '/client-portal/web-trader',
-    icon: 'stock-market.png'
-  },
-  {
     label: 'Dashboard',
     link: '/client-portal/dashboard',
     icon: 'dashboard.png'
@@ -23,5 +18,10 @@ export const CLIENT_PORTAL_NAVIGATION = [
     label: 'Profile',
     link: '/client-portal/profile',
     icon: 'profile.png'
-  }
+  },
+  {
+    label: 'Web Trader',
+    link: '/client-portal/web-trader',
+    icon: 'stock-market.png'
+  },
 ]

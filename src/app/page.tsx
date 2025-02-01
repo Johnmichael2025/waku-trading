@@ -139,7 +139,7 @@ export default function Home() {
       <section>
         <div className={clsx("p-10 mt-10", styles["benefits-section"])}>
           <div className={styles["benefits-intro"]}>
-            <h3>OUR BENEFITS</h3>
+            <h3 className="mb-4">OUR BENEFITS</h3>
             <h1>Alphabourse provides numerous</h1>
             <h1>opportunities for smart trading</h1>
           </div>

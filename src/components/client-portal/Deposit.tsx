@@ -5,24 +5,33 @@ import { TradingAccount } from "@/models/trading-account.model";
 import { Transaction } from "@/models/transaction.model";
 import { User } from "@/models/user.model";
 import { UserContext } from "@/providers/context";
-import { Button, Chip, Input, Select, SelectItem } from "@heroui/react";
+import { Alert, Button, Chip, Input, Select, SelectItem } from "@heroui/react";
+import { useSearchParams } from "next/navigation";
 import React, { useActionState, useContext, useEffect, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 
 type DepositProps = {
-  tradingAccounts: TradingAccount[]
-  user: User
+  tradingAccounts: TradingAccount[];
+  user: User;
 };
 
 const initialState = {
   success: false,
-  message: '',
-  data: null
-}
+  message: "",
+  data: null,
+};
 export default function Deposit({ tradingAccounts, user }: DepositProps) {
-  const [state, formAction, pending] = useActionState(createTransaction, initialState);
+  const [state, formAction, pending] = useActionState(
+    createTransaction,
+    initialState
+  );
   const [selectedAmount, setSelectedAmount] = useState("");
   const { addTransaction } = useContext(UserContext);
+  const searchParams = useSearchParams();
+  const defaultAccountId =
+    searchParams?.get("transactionType") === TRANSACTION_TYPE.DEPOSIT
+      ? searchParams?.get("accountId")
+      : "";
 
   const onChangeAmount = (amount: string) => {
     setSelectedAmount(amount);
@@ -31,30 +40,39 @@ export default function Deposit({ tradingAccounts, user }: DepositProps) {
   useEffect(() => {
     if (state.success) {
       toast.success(state.message);
-      addTransaction(state.data as unknown as Transaction)
+      addTransaction(state.data as unknown as Transaction);
     }
-  }, [state, addTransaction])
+  }, [state, addTransaction]);
 
   return (
     <>
       <h3>Depositing to your trading account</h3>
-      <p className="my-4 w-[400px]">
+      <Alert color="primary" className="my-4 w-[400px]">
         Simply deposit to one of your trading accounts by selecting it from the
         list choosing a payment method and defining the desired deposit amount.
-      </p>
+      </Alert>
       <h3 className="mt-4 mb-4">New deposit</h3>
 
       <form action={formAction}>
         <input type="hidden" name="user-id" value={user?.id} />
-        <input type="hidden" name="user-name" value={`${user.firstName} ${user.lastName}`} />
+        <input
+          type="hidden"
+          name="user-name"
+          value={`${user.firstName} ${user.lastName}`}
+        />
         <input type="hidden" name="user-email" value={user?.email} />
-        <input type="hidden" name="transaction-type" value={TRANSACTION_TYPE.DEPOSIT} />
+        <input
+          type="hidden"
+          name="transaction-type"
+          value={TRANSACTION_TYPE.DEPOSIT}
+        />
         <div className="flex flex-col gap-5">
           <div className="flex flex-col gap-2">
             <h3 className="text-default-500 text-small">
               Select trading account
             </h3>
             <Select
+              defaultSelectedKeys={defaultAccountId ? [defaultAccountId] : ""}
               isRequired
               name="trading-account-id"
               className="w-[400px]"
@@ -73,12 +91,12 @@ export default function Deposit({ tradingAccounts, user }: DepositProps) {
             <Input
               value={selectedAmount}
               onChange={(e) => setSelectedAmount(e.target.value)}
-              required
+              isRequired
               name="amount"
               className="w-[400px]"
               label="Amount"
               description="Please enter the amount in USD"
-              type="text"
+              type="number"
             />
           </div>
           <div className="flex flex-row gap-6">
@@ -111,7 +129,12 @@ export default function Deposit({ tradingAccounts, user }: DepositProps) {
             </div>
           </div>
           <div>
-            <Button isLoading={pending} type="submit" className="min-w-[400px]" color="default">
+            <Button
+              isLoading={pending}
+              type="submit"
+              className="min-w-[400px]"
+              color="default"
+            >
               Deposit
             </Button>
           </div>

@@ -9,6 +9,13 @@ export interface User {
   password: string 
   phone: string
   country: string
+  gender: string 
+  language: string 
+  identificationNumber: string
+  address: string 
+  city: string 
+  postalCode: string
+  countrySpecificID: string
   tradingAccounts: TradingAccount[]
   transactions: Transaction[]
 }

@@ -8,17 +8,17 @@ import { Tabs, Tab } from "@heroui/react";
 import React, { useContext, useState } from "react";
 
 export default function Trading() {
-  const { user, tradingAccounts } = useContext(UserContext);
+  const { user, tradingAccounts, transactions } = useContext(UserContext);
   const [selectedTab, setSelectedTab] = useState(TRADING_TABS.TRADING_ACCOUNTS);
 
   return (
     <>
       {user && (
         <div>
-          <div className="flex justify-end">
-            <span className="relative top-8">
+          <div className="float-end">
+            <div className="bg-gray-200 p-4 relative text-center w-[250px]">
               <strong>Total balance</strong>: 0.00 USD
-            </span>
+            </div>
           </div>
           <Tabs
             color="primary"
@@ -34,13 +34,19 @@ export default function Trading() {
               />
             </Tab>
             <Tab key={TRADING_TABS.HISTORY} title="History">
-              <Transactions tradingAccounts={tradingAccounts} />
+              <Transactions
+                transactions={transactions}
+                tradingAccounts={tradingAccounts}
+              />
             </Tab>
             <Tab
               key={TRADING_TABS.CREATE_ACCOUNT}
               title="Create Trading account"
             >
-              <CreateTradingAccount userId={user.id} />
+              <CreateTradingAccount
+                userId={user.id}
+                accountsLength={tradingAccounts.length}
+              />
             </Tab>
           </Tabs>
         </div>

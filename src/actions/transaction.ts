@@ -10,21 +10,25 @@ const resend = new Resend(process.env.NEXT_PUBLIC_RESEND_API_KEY);
 const sendEmail = async (transactionType: TRANSACTION_TYPE, amount: string, name: string, email: string, accountId: string, toAccountId?: string | undefined) => {
   try {
     let message = '';
+    let emailSubject = '';
     switch (transactionType) {
       case TRANSACTION_TYPE.DEPOSIT:
+        emailSubject = `Deposit request from ${name}`;
         message = `${name} is requesting to deposit an amount of ${amount} USD to account ${accountId}`;
         break;
       case TRANSACTION_TYPE.WITHDRAW:
+        emailSubject = `Withdrawal request from ${name}`;
         message = `${name} is requesting to withdraw an amount of ${amount} USD from account ${accountId}`;
         break;
       case TRANSACTION_TYPE.TRANSFER_FUNDS:
+        emailSubject = `Transfer fund request from ${name}`;
         message = `${name} is requesting to transfer an amount of ${amount} USD from account ${accountId} to account ${toAccountId}`;
         break;
     }
     const { error } = await resend.emails.send({
       from: 'admin@alfabourse.com',
-      to: ['jovenlin28@gmail.com'],
-      subject: 'Transaction created',
+      to: ['admin@alfabourse.com'],
+      subject: emailSubject,
       react: EmailTemplate({ name, message, email }),
     });
 
@@ -71,13 +75,13 @@ export async function createTransaction(previousState: ActionStateResponse, form
     let message: string = '';
     switch (transactionType) {
       case TRANSACTION_TYPE.DEPOSIT:
-        message = `An amount of ${amount} USD has been successfully deposited to account ${accountId}`;
+        message = `A deposit amount of ${amount} USD has been successfully requested to account ${accountId}`;
         break;
       case TRANSACTION_TYPE.WITHDRAW:
-        message = `An amount of ${amount} USD has been successfully withdraw from account ${accountId}`;
+        message = `A withdrawal amount of ${amount} USD has been successfully requested from account ${accountId}`;
         break;
       case TRANSACTION_TYPE.TRANSFER_FUNDS:
-        message = `An amount of ${amount} USD has been successfully transferred from account ${accountId} to account ${toAccountId}`;
+        message = `A transfer fund amount of ${amount} USD has been successfully requested from account ${accountId} to account ${toAccountId}`;
         break;
     }
     await sendEmail(transactionType as TRANSACTION_TYPE, amount, userName, userEmail, accountId, toAccountId);

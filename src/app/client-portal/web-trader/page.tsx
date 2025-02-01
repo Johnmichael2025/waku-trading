@@ -1,7 +1,10 @@
-import React from 'react'
+import TradingViewWidget from "@/components/TradingViewWidget";
+import React from "react";
 
 export default function page() {
   return (
-    <div>WEb Trader</div>
-  )
+    <>
+      <TradingViewWidget />
+    </>
+  );
 }

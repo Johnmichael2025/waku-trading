@@ -3,6 +3,7 @@ import { Card, CardHeader, CardBody, CardFooter, Button } from "@heroui/react";
 import { TradingAccount } from "@/models/trading-account.model";
 import Link from "next/link";
 import Image from "next/image";
+import { TRANSACTION_TYPE } from "@/enums/transaction-type.enum";
 
 type TradingAccountsProps = {
   accounts: TradingAccount[];
@@ -75,11 +76,22 @@ export default function TradingAccounts({
                 </div>
               </CardBody>
               <CardFooter>
-                <Link href="/client-portal">
-                  <Button className="min-w-[350px]" color="default">
-                    Deposit
-                  </Button>
-                </Link>
+                <div className="flex flex-col gap-4">
+                  <Link
+                    href={`/client-portal?accountId=${account.id}&transactionType=${TRANSACTION_TYPE.DEPOSIT}`}
+                  >
+                    <Button className="min-w-[350px]" color="default">
+                      Deposit
+                    </Button>
+                  </Link>
+                  <Link
+                    href={`/client-portal?accountId=${account.id}&transactionType=${TRANSACTION_TYPE.WITHDRAW}`}
+                  >
+                    <Button className="min-w-[350px]" color="primary">
+                      Withdraw
+                    </Button>
+                  </Link>
+                </div>
               </CardFooter>
             </Card>
           ))}

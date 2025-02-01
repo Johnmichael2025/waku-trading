@@ -6,23 +6,41 @@ import TransferFunds from "@/components/client-portal/TransferFunds";
 import Withdraw from "@/components/client-portal/Withdraw";
 import { UserContext } from "@/providers/context";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
+import { TRANSACTION_TYPE } from "@/enums/transaction-type.enum";
 
 export default function Dashboard() {
   const { user, tradingAccounts } = useContext(UserContext);
+  const searchParams = useSearchParams();
+  const defaultTab = searchParams?.get('transactionType') || TRANSACTION_TYPE.DEPOSIT
 
   return (
     <>
       {user && (
         <div className="flex flex-row justify-between">
           <div className="flex flex-col w-[60%]">
-            <Tabs color="primary" variant="bordered" aria-label="Options">
-              <Tab key="deposit" title="Deposit">
+            <Tabs
+              defaultSelectedKey={defaultTab}
+              color="primary"
+              variant="bordered"
+              aria-label="Options"
+            >
+              <Tab
+                key={TRANSACTION_TYPE.DEPOSIT}
+                title={TRANSACTION_TYPE.DEPOSIT}
+              >
                 <Deposit user={user} tradingAccounts={tradingAccounts} />
               </Tab>
-              <Tab key="transfer-funds" title="Transfer funds">
+              <Tab
+                key={TRANSACTION_TYPE.TRANSFER_FUNDS}
+                title={TRANSACTION_TYPE.TRANSFER_FUNDS}
+              >
                 <TransferFunds user={user} tradingAccounts={tradingAccounts} />
               </Tab>
-              <Tab key="withdraw" title="Withdraw">
+              <Tab
+                key={TRANSACTION_TYPE.WITHDRAW}
+                title={TRANSACTION_TYPE.WITHDRAW}
+              >
                 <Withdraw user={user} tradingAccounts={tradingAccounts} />
               </Tab>
             </Tabs>
@@ -30,7 +48,7 @@ export default function Dashboard() {
           <div className="flex-1 w-[40%]">
             <div className="flex bg-gray-200 justify-between p-4 rounded-sm">
               <div>
-                <strong>Amount</strong>: 0.00 USD
+                <strong>Total balance</strong>: 0.00 USD
               </div>
               <div>
                 <Link className="text-blue-500" href="/client-portal/trading">

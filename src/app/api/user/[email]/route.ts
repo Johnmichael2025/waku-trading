@@ -12,6 +12,9 @@ export async function GET(request: Request, {params}: {params: Promise<{ email: 
       include: {
         tradingAccounts: true,
         transactions: {
+          orderBy: {
+            dateCreated: 'desc'
+          },
           include: {
             tradingAccount: true
           }

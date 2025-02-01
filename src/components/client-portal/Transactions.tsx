@@ -1,6 +1,5 @@
 "use client";
-import { UserContext } from "@/providers/context";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Table,
   TableHeader,
@@ -12,6 +11,8 @@ import {
   Select,
   DateRangePicker,
   Button,
+  RangeValue,
+  DateValue,
 } from "@heroui/react";
 
 import clsx from "clsx";
@@ -19,6 +20,8 @@ import { TRANSACTION_STATUS } from "@/enums/transaction-status.enum";
 import { TradingAccount } from "@/models/trading-account.model";
 import { Transaction } from "@/models/transaction.model";
 import Image from "next/image";
+import moment from "moment";
+import { TRANSACTION_TYPE } from "@/enums/transaction-type.enum";
 
 const getBGClass = (status: TRANSACTION_STATUS) => {
   switch (status) {
@@ -45,6 +48,10 @@ const columns = [
     label: "Trading Account",
   },
   {
+    key: "Withdrawal Type",
+    label: "Withdrawal Type",
+  },
+  {
     key: "Date Created",
     label: "Date Created",
   },
@@ -55,15 +62,17 @@ const columns = [
 ];
 
 type TransactionsProps = {
-  tradingAccounts: TradingAccount[];
+  tradingAccounts: TradingAccount[]
+  transactions: Transaction[]
 };
-export default function Transactions({ tradingAccounts }: TransactionsProps) {
-  const { transactions } = useContext(UserContext);
+export default function Transactions({ tradingAccounts, transactions }: TransactionsProps) {
   const [filteredTransactions, setFilteredTransactions] =
     useState<Transaction[]>(transactions);
   const [selectedAccountId, setSelectedAccountId] = useState("");
   const [selectedStatus, setSelectedStatus] = useState("");
-
+  const [selectedDateRange, setSelectedDateRange] =
+    useState<RangeValue<DateValue> | null>(null);
+  const [selectedTransactionType, setSelectedTransactionType] = useState("");
   useEffect(() => {
     let _filteredTransactions = [...transactions];
     if (selectedAccountId) {
@@ -76,13 +85,49 @@ export default function Transactions({ tradingAccounts }: TransactionsProps) {
         return transaction.status === selectedStatus;
       });
     }
+
+    if (selectedTransactionType) {
+      _filteredTransactions = _filteredTransactions.filter((transaction) => {
+        return transaction.transactionType === selectedTransactionType;
+      });
+    }
+
+    if (selectedDateRange) {
+      let from: string;
+      let to: string;
+      if (selectedDateRange?.start) {
+        const { month, day, year } = selectedDateRange.start;
+        from = moment(`${month}/${day}/${year}`).format("MM-DD-YYYY");
+      }
+      if (selectedDateRange?.end) {
+        const { month, day, year } = selectedDateRange.end;
+        to = moment(`${month}/${day}/${year}`).format("MM-DD-YYYY");
+      }
+      _filteredTransactions = _filteredTransactions.filter((transaction) => {
+        return moment(
+          moment(transaction.dateCreated).format("MM-DD-YYYY")
+        ).isBetween(from, to);
+      });
+    }
     setFilteredTransactions(_filteredTransactions);
-  }, [selectedAccountId, selectedStatus, transactions]);
+  }, [
+    selectedAccountId,
+    selectedTransactionType,
+    selectedDateRange,
+    selectedStatus,
+    transactions,
+  ]);
 
   const resetFilters = () => {
     setSelectedAccountId("");
     setSelectedStatus("");
+    setSelectedTransactionType("");
+    setSelectedDateRange(null);
     setFilteredTransactions(transactions);
+  };
+
+  const onChangeDateRange = (rangeValue: RangeValue<DateValue> | null) => {
+    setSelectedDateRange(rangeValue);
   };
 
   return (
@@ -132,10 +177,29 @@ export default function Transactions({ tradingAccounts }: TransactionsProps) {
               </Select>
             </div>
             <div className="flex-1">
-              <DateRangePicker className="max-w-xs" label="From" />
+              <Select
+                selectedKeys={[selectedTransactionType]}
+                onChange={(e) => setSelectedTransactionType(e.target.value)}
+                label="Transaction Type"
+              >
+                <SelectItem key={TRANSACTION_TYPE.DEPOSIT}>
+                  {TRANSACTION_TYPE.DEPOSIT}
+                </SelectItem>
+                <SelectItem key={TRANSACTION_TYPE.WITHDRAW}>
+                  {TRANSACTION_TYPE.WITHDRAW}
+                </SelectItem>
+                <SelectItem key={TRANSACTION_TYPE.TRANSFER_FUNDS}>
+                  {TRANSACTION_TYPE.TRANSFER_FUNDS}
+                </SelectItem>
+              </Select>
             </div>
             <div className="flex-1">
-              <DateRangePicker className="max-w-xs" label="To" />
+              <DateRangePicker
+                value={selectedDateRange}
+                onChange={onChangeDateRange}
+                className="max-w-xs"
+                label="Date Range"
+              />
             </div>
           </div>
           <div className="flex justify-between mt-4">
@@ -157,7 +221,8 @@ export default function Transactions({ tradingAccounts }: TransactionsProps) {
                   <TableCell>{transaction.transactionType}</TableCell>
                   <TableCell>{transaction.amount}</TableCell>
                   <TableCell>{transaction.tradingAccount?.name}</TableCell>
-                  <TableCell>{transaction.dateCreated}</TableCell>
+                  <TableCell>{transaction.withdrawalType ? transaction.withdrawalType : 'N/A'}</TableCell>
+                  <TableCell>{moment(transaction.dateCreated).format('MMMM DD, YYYY')}</TableCell>
                   <TableCell>
                     <span
                       className={clsx(

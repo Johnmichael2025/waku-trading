@@ -17,7 +17,7 @@ export default function Profile() {
             <PersonalInfo user={user} />
           </Tab>
           <Tab key="change-password" title="Change Password">
-            <ChangePassword />
+            <ChangePassword user={user}  />
           </Tab>
           <Tab key="account-validation" title="Account Validation">
             <AccountValidation />

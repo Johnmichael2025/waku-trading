@@ -1,10 +1,13 @@
 'use server';
 
+import { ActionStateResponse } from "@/models/action-state-response.model";
 import prisma from "../lib/prisma";
+import { TradingAccount } from "@/models/trading-account.model";
 
-export async function createTradingAccount(userId: number, formData: FormData) {
+export async function createTradingAccount(previousState: ActionStateResponse, formData: FormData) {
   const name = formData.get('account-name') as string;
   const currency = formData.get('currency') as string;
+  const userId = formData.get('user-id') as string;
 
   try {
     const account = await prisma.tradingAccount.create({
@@ -17,14 +20,14 @@ export async function createTradingAccount(userId: number, formData: FormData) {
         leverage: '1:100',
         user: {
           connect: {
-            id: userId
+            id: +userId
           }
         }
       },
     });
-    return { success: true, message: 'Account created successfully', data: account};
+    return { success: true, message: 'Account created successfully', data: account as unknown as TradingAccount};
   } catch (err) {
     console.log(err, 'err signing up');
-    return { success: false, message:  (err as {message: string}).message };
+    return { success: false, message:  (err as {message: string}).message, data: null };
   }
 }

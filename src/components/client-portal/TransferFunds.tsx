@@ -4,7 +4,7 @@ import { TradingAccount } from "@/models/trading-account.model";
 import { Transaction } from "@/models/transaction.model";
 import { User } from "@/models/user.model";
 import { UserContext } from "@/providers/context";
-import { Button, Chip, Input, Select, SelectItem } from "@heroui/react";
+import { Alert, Button, Chip, Input, Select, SelectItem } from "@heroui/react";
 import React, { useActionState, useContext, useEffect, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 
@@ -45,10 +45,10 @@ export default function TransferFunds({
   return (
     <>
       <h3>Transfering funds between your trading accounts</h3>
-      <p className="my-4 w-[400px]">
+      <Alert color="primary" className="my-4 w-[400px]">
         Transfered funds will immediately be converted and credited to your
         trading account.
-      </p>
+      </Alert>
       <h3 className="mt-4 mb-4">Transfer funds</h3>
 
       <form action={formAction}>
@@ -110,12 +110,12 @@ export default function TransferFunds({
             <Input
               value={selectedAmount}
               onChange={(e) => setSelectedAmount(e.target.value)}
-              required
+              isRequired
               name="amount"
               className="w-[400px]"
               label="Amount"
               description="Please enter the amount in USD"
-              type="text"
+              type="number"
             />
           </div>
           <div className="flex flex-row gap-6">

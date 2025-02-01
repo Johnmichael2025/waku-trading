@@ -28,7 +28,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
       } as Transaction;
       return {
         ...prev,
-        transactions: [...prev.transactions, _transaction],
+        transactions: [_transaction, ...prev.transactions],
       };
     });
   };

@@ -1,11 +1,10 @@
-'use client';
+"use client";
 import React, { useEffect, useRef, memo } from "react";
 
 function TradingViewWidget() {
   const container = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    console.log('yes');
     const script = document.createElement("script");
     script.src =
       "https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js";

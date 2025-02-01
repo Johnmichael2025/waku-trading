@@ -4,9 +4,10 @@ import { TradingAccount } from "@/models/trading-account.model";
 import { Transaction } from "@/models/transaction.model";
 import { User } from "@/models/user.model";
 import { UserContext } from "@/providers/context";
-import { Button, Input, Select, SelectItem } from "@heroui/react";
+import { Alert, Button, Input, Select, SelectItem } from "@heroui/react";
+import { useSearchParams } from "next/navigation";
 import React, { useActionState, useContext, useEffect } from "react";
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast } from "react-toastify";
 
 type WithdrawProps = {
   tradingAccounts: TradingAccount[];
@@ -23,6 +24,11 @@ export default function Withdraw({ tradingAccounts, user }: WithdrawProps) {
     initialState
   );
   const { addTransaction } = useContext(UserContext);
+  const searchParams = useSearchParams();
+  const defaultAccountId =
+    searchParams?.get("transactionType") === TRANSACTION_TYPE.WITHDRAW
+      ? searchParams?.get("accountId")
+      : "";
 
   useEffect(() => {
     if (state.success) {
@@ -34,16 +40,20 @@ export default function Withdraw({ tradingAccounts, user }: WithdrawProps) {
   return (
     <>
       <h3>Withdrawing from trading account</h3>
-      <p className="my-4 w-[400px]">
+      <Alert color="primary" className="my-4 w-[400px]">
         Total deductions request from one of your trading accounts by selecting
         an account from the list choosing a payment account and defining the
         desired withdrawal amount.
-      </p>
+      </Alert>
       <h3 className="mt-4 mb-4">Total deductions request</h3>
 
       <form action={formAction}>
         <input type="hidden" name="user-id" value={user?.id} />
-        <input type="hidden" name="user-name" value={`${user.firstName} ${user.lastName}`} />
+        <input
+          type="hidden"
+          name="user-name"
+          value={`${user.firstName} ${user.lastName}`}
+        />
         <input type="hidden" name="user-email" value={user?.email} />
         <input
           type="hidden"
@@ -56,6 +66,8 @@ export default function Withdraw({ tradingAccounts, user }: WithdrawProps) {
               From trading account
             </h3>
             <Select
+              defaultSelectedKeys={defaultAccountId ? [defaultAccountId] : ""}
+              isRequired
               name="trading-account-id"
               className="w-[400px]"
               label="Select trading account"
@@ -71,16 +83,18 @@ export default function Withdraw({ tradingAccounts, user }: WithdrawProps) {
           <div className="flex flex-col gap-2">
             <h3 className="text-default-500 text-small">Amount</h3>
             <Input
+              isRequired
               name="amount"
               className="w-[400px]"
               label="Amount"
               description="Please enter the amount in USD"
-              type="text"
+              type="number"
             />
           </div>
           <div className="flex flex-col gap-2">
             <h3 className="text-default-500 text-small">Withdrawal type</h3>
             <Select
+              isRequired
               name="withdrawal-type"
               className="w-[400px]"
               label="Select trading account"

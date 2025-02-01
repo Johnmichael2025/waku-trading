@@ -2,8 +2,9 @@
 import { createTradingAccount } from "@/actions/create-trading-account";
 import { TradingAccount } from "@/models/trading-account.model";
 import { UserContext } from "@/providers/context";
-import { Button, Input, Select, SelectItem } from "@heroui/react";
-import React, { useContext, useState } from "react";
+import { Alert, Button, Input, Select, SelectItem } from "@heroui/react";
+import React, { useActionState, useContext, useEffect } from "react";
+import { toast, ToastContainer } from "react-toastify";
 
 const currencyList = [
   {
@@ -20,43 +21,58 @@ const currencyList = [
   },
 ];
 
+const initialState = {
+  success: false,
+  message: "",
+  data: null,
+};
+
 type CreateTradingAccountProps = {
   userId: number;
+  accountsLength: number;
 };
 export default function CreateTradingAccount({
   userId,
+  accountsLength,
 }: CreateTradingAccountProps) {
-  const handleCreateAccount = createTradingAccount.bind(null, userId);
-  const [processing, setProcessing] = useState(false);
-  const {addTradingAccount} = useContext(UserContext);
+  const [state, formAction, pending] = useActionState(
+    createTradingAccount,
+    initialState
+  );
+  const { addTradingAccount } = useContext(UserContext);
+  useEffect(() => {
+    if (state.success) {
+      addTradingAccount(state.data as TradingAccount);
+      toast.success(state.message);
+    } else if (state.message) {
+      toast.error(state.message);
+    }
+  }, [addTradingAccount, state]);
 
-  const onCreateAccount = (form: FormData) => {
-    setProcessing(true);
-    handleCreateAccount(form).then(res => {
-      setProcessing(false);
-      if (res.success) {
-        addTradingAccount(res.data as unknown as TradingAccount);
-        // router.push("/client-portal/trading");
-      }
-    });
-  };
   return (
     <>
       <h3>Creating a commercial account</h3>
-      <p className="my-4">
-        For maximum flexibility you can produce to 2 live trading accounts.
-      </p>
+      {accountsLength < 2 ? (
+        <Alert color="primary" className="my-4 w-[400px]">
+          For maximum flexibility you can produce to 2 live trading accounts.
+        </Alert>
+      ) : (
+        <Alert color="warning" className="my-4 w-[400px]">
+          You have reached a maximum of 2 live trading accounts.
+        </Alert>
+      )}
       <h3 className="mt-4 mb-4">Trading account details</h3>
 
-      <form action={onCreateAccount}>
+      <form action={formAction}>
+        <input type="hidden" value={userId} name="user-id" />
         <div className="flex flex-col gap-5">
           <div className="flex flex-col gap-2">
             <h3 className="text-default-500 text-small">
               Trading account name
             </h3>
             <Input
-              required
-              className="w-[350px]"
+              isRequired
+              className="w-[400px]"
               label="Name your commercial account"
               type="text"
               name="account-name"
@@ -67,7 +83,7 @@ export default function CreateTradingAccount({
             <Select
               name="currency"
               isRequired
-              className="w-[350px]"
+              className="w-[400px]"
               label="Select trading account"
             >
               {currencyList.map((currency) => (
@@ -75,17 +91,15 @@ export default function CreateTradingAccount({
                   {currency.label}
                 </SelectItem>
               ))}
-
-              {/* <SelectItem value="Crypto">Crypto</SelectItem>
-              <SelectItem value="Wire">Wire</SelectItem> */}
             </Select>
           </div>
 
           <div className="mt-4">
             <Button
-              isLoading={processing}
+              isLoading={pending}
+              isDisabled={accountsLength >= 2}
               type="submit"
-              className="min-w-[350px]"
+              className="min-w-[400px]"
               color="default"
             >
               Set up account
@@ -93,6 +107,7 @@ export default function CreateTradingAccount({
           </div>
         </div>
       </form>
+      <ToastContainer />
     </>
   );
 }
