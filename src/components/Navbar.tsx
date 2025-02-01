@@ -35,7 +35,7 @@ export default function Navbar() {
   return (
     <div
       style={{ left: pathname?.includes("client-portal") ? "270px" : 0 }}
-      className={clsx(styles["sticky-wrapper"], stickyNav ? styles.sticky : "")}
+      className={clsx(styles["sticky-wrapper"], stickyNav && !pathname?.includes("client-portal") ? styles.sticky : "")}
     >
       <div
         style={{
