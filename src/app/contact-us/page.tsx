@@ -35,7 +35,7 @@ export default function page() {
               alt="Contact email"
             />
             <h2>Email</h2>
-            <h4>support@essentrafinance.com</h4>
+            <h4>admin@alfabourse.com</h4>
           </div>
           <div className={clsx(styles["contact-item"], styles["telephone"])}>
             <Image
