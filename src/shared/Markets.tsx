@@ -4,6 +4,7 @@ import Image, { StaticImageData } from "next/image";
 import { faChevronCircleRight } from "@fortawesome/free-solid-svg-icons";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import TradingAssets from "./TradingAssets";
+import Link from "next/link";
 library.add(faChevronCircleRight);
 
 type ImgText = {
@@ -14,9 +15,13 @@ type ImgText = {
 type MarketsProps = {
   howItWorks: ImgText;
   howToStart: ImgText;
-  iframeWidget: string
+  iframeWidget: string;
 };
-export default function Markets({ howItWorks, howToStart, iframeWidget }: MarketsProps) {
+export default function Markets({
+  howItWorks,
+  howToStart,
+  iframeWidget,
+}: MarketsProps) {
   return (
     <>
       <section className={styles["image-text-section"]}>
@@ -48,7 +53,9 @@ export default function Markets({ howItWorks, howToStart, iframeWidget }: Market
           <div className="flex-1">
             <h1>{howToStart.title}</h1>
             {howToStart.paragraph}
-            <button>JOIN</button>
+            <Link href="/sign-up">
+              <button>JOIN</button>
+            </Link>
           </div>
           <div className="flex-1">
             <Image

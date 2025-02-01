@@ -27,7 +27,9 @@ body {
   height: 500px !important;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   font-weight: 700;
   letter-spacing: 0.5px;
 }
@@ -47,4 +49,18 @@ h1, h2, h3 {
   &:hover {
     background-color: var(--dark-blue);
   }
+}
+
+.button-dark {
+  padding: 12px 29px 12px 29px;
+  font-size: 16px;
+  font-weight: 400;
+  text-transform: uppercase;
+  background-color: rgba(16, 110, 234, 0);
+  border-style: solid;
+  border-color: var(--dark-blue);
+  border-radius: 4px 4px 4px 4px;
+  color: #ffffff;
+  background-color: var(--dark-blue);
+  margin-top: 20px;
 }

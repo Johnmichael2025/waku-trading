@@ -39,7 +39,9 @@ export default function Home() {
             <div className="flex-1">
               <h3>PROFESSIONALISM</h3>
               <h1>We are confident in what we do and proud of the result</h1>
-              <button className="light-button-outline">LEARN MORE</button>
+              <Link href="/sign-up">
+                <button className="button-dark">LEARN MORE</button>
+              </Link>
             </div>
             <div className="flex-1">
               <div className="flex flex-col gap-6">
@@ -106,7 +108,9 @@ export default function Home() {
                 Customize the terminal and combine it with various strategies to
                 achieve high results. Our platform works from any browser.
               </p>
-              <button className="light-button-outline">ACT NOW</button>
+              <Link href="/sign-up">
+                <button className="light-button-outline">ACT NOW</button>
+              </Link>
             </div>
           </div>
           <div className={clsx("flex-1 p-10", styles.options)}>
