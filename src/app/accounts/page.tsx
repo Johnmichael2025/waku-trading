@@ -5,6 +5,7 @@ import { PREMIUM_ACCOUNTS } from "@/constants/premium-accounts.constant";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import Link from "next/link";
 library.add(faCheck);
 
 export default function page() {
@@ -59,18 +60,23 @@ export default function page() {
                   <span>{account.protection}</span>
                 </li>
               </ul>
-              <br/>
-              <button className="light-button-outline">
-                Open an account
-              </button>
+              <br />
+              <Link href="/sign-up">
+                <button className="light-button-outline">
+                  Open an account
+                </button>
+              </Link>
             </div>
           ))}
         </div>
       </section>
       <section>
-        <div className={styles['consult-us']}>
+        <div className={styles["consult-us"]}>
           <h4>Need help to decide?</h4>
-          <h1>Our managers will help you choose a strategy and consult you on all issues.</h1>
+          <h1>
+            Our managers will help you choose a strategy and consult you on all
+            issues.
+          </h1>
           <button className="light-button-outline">OPEN AN ACCOUNT</button>
         </div>
       </section>
