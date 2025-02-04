@@ -16,6 +16,7 @@ export interface User {
   city: string 
   postalCode: string
   countrySpecificID: string
+  dateCreated: string
   tradingAccounts: TradingAccount[]
   transactions: Transaction[]
 }

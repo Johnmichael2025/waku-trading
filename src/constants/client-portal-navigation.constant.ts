@@ -12,7 +12,7 @@ export const CLIENT_PORTAL_NAVIGATION = [
   {
     label: 'Trading',
     link: '/client-portal/trading',
-    icon: 'trading.png'
+    icon: 'trading-accounts.png'
   },
   {
     label: 'Profile',

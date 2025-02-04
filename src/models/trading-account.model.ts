@@ -8,4 +8,5 @@ export interface TradingAccount {
   name: string
   server: string 
   leverage: string 
+  dateCreated: string
 }

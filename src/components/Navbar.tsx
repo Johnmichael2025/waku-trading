@@ -8,7 +8,8 @@ import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
-
+import { isAdminPortal, isClientPortal } from "@/utils/is-portal";
+import { ADMINS } from "@/constants/admins.constant";
 export default function Navbar() {
   const pathname = usePathname();
   const session = useSession();
@@ -34,12 +35,16 @@ export default function Navbar() {
 
   return (
     <div
-      style={{ left: pathname?.includes("client-portal") ? "270px" : 0 }}
-      className={clsx(styles["sticky-wrapper"], stickyNav && !pathname?.includes("client-portal") ? styles.sticky : "")}
+      style={{ left: isClientPortal(pathname) ? "270px" : 0 }}
+      className={clsx(
+        styles["sticky-wrapper"],
+        stickyNav && !isClientPortal(pathname) ? styles.sticky : "",
+        isAdminPortal(pathname) ? "hidden" : ""
+      )}
     >
       <div
         style={{
-          boxShadow: pathname?.includes("client-portal")
+          boxShadow: isClientPortal(pathname)
             ? "0px 0px 5px 2px rgba(0, 0, 0, 0.3)"
             : "",
         }}
@@ -57,7 +62,7 @@ export default function Navbar() {
           <div
             className={clsx(
               styles.navbar,
-              pathname?.includes("client-portal") ? styles["client-portal"] : ""
+              isClientPortal(pathname) ? styles["client-portal"] : ""
             )}
           >
             <ul className={styles["parent-list"]}>
@@ -89,9 +94,13 @@ export default function Navbar() {
                 </>
               ) : (
                 <>
-                  {!pathname?.includes("client-portal") && (
+                  {!isClientPortal(pathname) && (
                     <li>
-                      <Link href="/client-portal">Client Portal</Link>
+                      {ADMINS.includes(session.data.user?.email || "") ? (
+                        <Link href="/admin-portal">Admin Portal</Link>
+                      ) : (
+                        <Link href="/client-portal">Client Portal</Link>
+                      )}
                     </li>
                   )}
 

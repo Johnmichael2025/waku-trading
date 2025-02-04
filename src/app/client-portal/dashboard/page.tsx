@@ -3,7 +3,7 @@ import Transactions from "@/components/client-portal/Transactions";
 import { UserContext } from "@/providers/context";
 import React, { useContext } from "react";
 
-export default function Dashboard() {
+export default function ClientDashboard() {
   const { tradingAccounts, transactions } = useContext(UserContext);
   return (
     <>

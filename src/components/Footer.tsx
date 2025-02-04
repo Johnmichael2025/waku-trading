@@ -12,7 +12,7 @@ export default function Footer() {
   const pathname = usePathname();
 
   return (
-    <>
+    <div className={pathname?.includes("admin-portal") ? "hidden" : ""}>
       <footer
         className={clsx(
           styles.footer,
@@ -35,6 +35,6 @@ export default function Footer() {
         <p>©copyright 2025 Alfabourse. All rights reserved.</p>
       </footer>
       {!pathname?.includes("client-portal") && <SociaMediaFloatingIcons />}
-    </>
+    </div>
   );
 }
