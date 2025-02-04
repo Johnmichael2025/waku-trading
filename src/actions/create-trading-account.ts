@@ -1,18 +1,24 @@
 'use server';
 
+import { Resend } from 'resend';
+const resend = new Resend(process.env.NEXT_PUBLIC_RESEND_API_KEY);
+
 import { ActionStateResponse } from "@/models/action-state-response.model";
 import prisma from "../lib/prisma";
 import { TradingAccount } from "@/models/trading-account.model";
+import EmailTemplate from '@/components/EmailTemplate';
 
 export async function createTradingAccount(previousState: ActionStateResponse, formData: FormData) {
-  const name = formData.get('account-name') as string;
+  const tradingAccountName = formData.get('account-name') as string;
   const currency = formData.get('currency') as string;
   const userId = formData.get('user-id') as string;
+  const email = formData.get('user-email') as string;
+  const userName = formData.get('user-name') as string;
 
   try {
     const account = await prisma.tradingAccount.create({
       data: {
-        name,
+        name: tradingAccountName,
         currency,
         balance: 0,
         credit: 0,
@@ -25,9 +31,20 @@ export async function createTradingAccount(previousState: ActionStateResponse, f
         }
       },
     });
-    return { success: true, message: 'Account created successfully', data: account as unknown as TradingAccount};
+    const emailMessage = `${userName} has created a trading account`;
+    const { error } = await resend.emails.send({
+      from: 'admin@alfabourse.com',
+      to: ['admin@alfabourse.com'],
+      subject: 'Trading account created',
+      react: EmailTemplate({ name: userName, message: emailMessage, email }),
+    });
+    if (error) {
+      console.log(error, 'error');
+      return { success: false, message: 'There was an error sending an email.', data: null };
+    }
+    return { success: true, message: 'Account created successfully', data: account as unknown as TradingAccount };
   } catch (err) {
-    console.log(err, 'err signing up');
-    return { success: false, message:  (err as {message: string}).message, data: null };
+    console.log(err, 'err creating trading account');
+    return { success: false, message: (err as { message: string }).message, data: null };
   }
 }

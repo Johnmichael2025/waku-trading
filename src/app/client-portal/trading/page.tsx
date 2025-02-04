@@ -44,7 +44,7 @@ export default function Trading() {
               title="Create Trading account"
             >
               <CreateTradingAccount
-                userId={user.id}
+                user={user}
                 accountsLength={tradingAccounts.length}
               />
             </Tab>

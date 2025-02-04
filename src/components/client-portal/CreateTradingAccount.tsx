@@ -1,6 +1,8 @@
 "use client";
 import { createTradingAccount } from "@/actions/create-trading-account";
+import { CURRENCY } from "@/enums/currency.enum";
 import { TradingAccount } from "@/models/trading-account.model";
+import { User } from "@/models/user.model";
 import { UserContext } from "@/providers/context";
 import { Alert, Button, Input, Select, SelectItem } from "@heroui/react";
 import React, { useActionState, useContext, useEffect } from "react";
@@ -8,16 +10,20 @@ import { toast, ToastContainer } from "react-toastify";
 
 const currencyList = [
   {
-    key: "USD",
-    label: "USD",
+    key: CURRENCY.USD,
+    label: CURRENCY.USD,
   },
   {
-    key: "Crypto",
-    label: "Crypto",
+    key: CURRENCY.EURO,
+    label: CURRENCY.EURO,
   },
   {
-    key: "Wire",
-    label: "Wire",
+    key: CURRENCY.CRYPTO,
+    label: CURRENCY.CRYPTO,
+  },
+  {
+    key: CURRENCY.WIRE,
+    label: CURRENCY.WIRE,
   },
 ];
 
@@ -28,11 +34,11 @@ const initialState = {
 };
 
 type CreateTradingAccountProps = {
-  userId: number;
+  user: User;
   accountsLength: number;
 };
 export default function CreateTradingAccount({
-  userId,
+  user,
   accountsLength,
 }: CreateTradingAccountProps) {
   const [state, formAction, pending] = useActionState(
@@ -64,7 +70,9 @@ export default function CreateTradingAccount({
       <h3 className="mt-4 mb-4">Trading account details</h3>
 
       <form action={formAction}>
-        <input type="hidden" value={userId} name="user-id" />
+        <input type="hidden" value={user.id} name="user-id" />
+        <input type="hidden" value={user.email} name="user-email" />
+        <input type="hidden" value={`${user.firstName} ${user.lastName}`} name="user-name" />
         <div className="flex flex-col gap-5">
           <div className="flex flex-col gap-2">
             <h3 className="text-default-500 text-small">
