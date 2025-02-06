@@ -5,6 +5,7 @@ import React from "react";
 
 export default async function page() {
   const tradingAccounts = (await getTradingAccounts()) as TradingAccount[];
+  console.log(tradingAccounts, 'trading accounts');
   return (
     <>
       <TradingAccounts accounts={tradingAccounts} />
