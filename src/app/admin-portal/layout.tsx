@@ -9,8 +9,8 @@ export default function AdminPortalLayout({
 }>) {
   return (
     <>
+      <SidebarNavigation navLinks={ADMIN_PORTAL_NAVIGATION} />
       <Suspense>
-        <SidebarNavigation navLinks={ADMIN_PORTAL_NAVIGATION} />
         <div className="md:ml-[270px] p-10">{children}</div>
       </Suspense>
     </>
