@@ -5,6 +5,7 @@ import { getTradingAccounts } from "@/utils/get-trading-accounts";
 import React from "react";
 
 const getTransactions = async () => {
+  console.log(process.env.NEXT_PUBLIC_API_BASE_URL, 'base url')
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/transactions`
   );
