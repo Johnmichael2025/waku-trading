@@ -5,6 +5,8 @@ import Link from "next/link";
 import React from "react";
 import styles from "../scss/client-portal-sidebar.module.scss";
 import { usePathname } from "next/navigation";
+import { ADMINS } from "@/constants/admins.constant";
+import { signOut, useSession } from "next-auth/react";
 
 type NavLink = {
   label: string;
@@ -19,6 +21,12 @@ export default function SidebarNavigation({
   navLinks,
 }: SidebarNavigationProps) {
   const pathname = usePathname();
+  const session = useSession();
+
+  const onLogout = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    signOut({ callbackUrl: "/login" });
+  };
 
   return (
     <aside
@@ -50,6 +58,23 @@ export default function SidebarNavigation({
               </Link>
             </li>
           ))}
+          {ADMINS.includes(session?.data?.user?.email || "") && (
+            <li>
+              <Link
+                onClick={onLogout}
+                href="#"
+                className="flex items-center p-2 gap-2 text-white rounded-lg dark:text-white group"
+              >
+                <Image
+                  src="/client-portal/logout.png"
+                  width={30}
+                  height={30}
+                  alt="Logout"
+                />
+                <span className="ms-3">Logout</span>
+              </Link>
+            </li>
+          )}
         </ul>
       </div>
     </aside>
