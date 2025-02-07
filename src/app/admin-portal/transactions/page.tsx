@@ -8,12 +8,15 @@ const getTransactions = async () => {
   try {
     const transactions = await prisma.transaction.findMany({
       include: {
-        tradingAccount: true
-      }
+        tradingAccount: true,
+      },
+      orderBy: {
+        dateCreated: 'desc'
+      },
     });
     return transactions as unknown as Transaction[];
   } catch (err) {
-    console.log(err, 'err');
+    console.log(err, "err");
     return [];
   }
 };
@@ -22,9 +25,12 @@ export default async function page() {
   const tradingAccounts = await getTradingAccounts();
 
   return (
-    <Transactions
-      transactions={transactions}
-      tradingAccounts={tradingAccounts}
-    />
+    <>
+      <Transactions
+        transactions={transactions}
+        tradingAccounts={tradingAccounts}
+      />
+      
+    </>
   );
 }

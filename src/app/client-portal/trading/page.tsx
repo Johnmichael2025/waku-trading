@@ -4,12 +4,21 @@ import TradingAccounts from "@/components/client-portal/TradingAccounts";
 import Transactions from "@/components/client-portal/Transactions";
 import { TRADING_TABS } from "@/enums/trading-tabs.enum";
 import { UserContext } from "@/providers/context";
+import { formatPrice } from "@/utils/format-price";
 import { Tabs, Tab } from "@heroui/react";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 export default function Trading() {
   const { user, tradingAccounts, transactions } = useContext(UserContext);
   const [selectedTab, setSelectedTab] = useState(TRADING_TABS.TRADING_ACCOUNTS);
+  const [totalBalance, setTotalBalance] = useState(0);
+
+  useEffect(() => {
+    const total = tradingAccounts.reduce((acc, account) => {
+      return acc + account.balance;
+    }, 0);
+    setTotalBalance(total);
+  }, [tradingAccounts]);
 
   return (
     <>
@@ -17,7 +26,7 @@ export default function Trading() {
         <div>
           <div className="float-end">
             <div className="bg-gray-200 p-4 relative text-center w-[250px]">
-              <strong>Total balance</strong>: 0.00 USD
+              <strong>Total balance</strong>: {formatPrice(totalBalance)}
             </div>
           </div>
           <Tabs

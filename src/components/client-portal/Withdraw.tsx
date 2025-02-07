@@ -4,9 +4,10 @@ import { TradingAccount } from "@/models/trading-account.model";
 import { Transaction } from "@/models/transaction.model";
 import { User } from "@/models/user.model";
 import { UserContext } from "@/providers/context";
+import { formatPrice } from "@/utils/format-price";
 import { Alert, Button, Input, Select, SelectItem } from "@heroui/react";
 import { useSearchParams } from "next/navigation";
-import React, { useActionState, useContext, useEffect } from "react";
+import React, { useActionState, useContext, useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 
 type WithdrawProps = {
@@ -23,6 +24,10 @@ export default function Withdraw({ tradingAccounts, user }: WithdrawProps) {
     createTransaction,
     initialState
   );
+  const [amount, setAmount] = useState("");
+  const [selectedAccount, setSelectedAccount] = useState<TradingAccount | null>(
+    null
+  );
   const { addTransaction } = useContext(UserContext);
   const searchParams = useSearchParams();
   const defaultAccountId =
@@ -36,6 +41,13 @@ export default function Withdraw({ tradingAccounts, user }: WithdrawProps) {
       addTransaction(state.data as unknown as Transaction);
     }
   }, [state, addTransaction]);
+
+  const onChangeAccount = (id: number) => {
+    const account = tradingAccounts.find(
+      (account) => account.id === id
+    ) as TradingAccount;
+    setSelectedAccount(account);
+  };
 
   return (
     <>
@@ -66,6 +78,9 @@ export default function Withdraw({ tradingAccounts, user }: WithdrawProps) {
               From trading account
             </h3>
             <Select
+              errorMessage="The selected trading account has an insufficient balance to make a withdrawal"
+              isInvalid={!!selectedAccount && selectedAccount.balance < +amount}
+              onChange={(e) => onChangeAccount(+e.target.value)}
               defaultSelectedKeys={defaultAccountId ? [defaultAccountId] : ""}
               isRequired
               name="trading-account-id"
@@ -73,7 +88,12 @@ export default function Withdraw({ tradingAccounts, user }: WithdrawProps) {
               label="Select trading account"
             >
               {tradingAccounts.map((account) => (
-                <SelectItem key={account.id} textValue={account.name}>
+                <SelectItem
+                  key={account.id}
+                  textValue={`${account.name} - ${formatPrice(
+                    account.balance
+                  )}`}
+                >
                   <p className="font-bold">{account.name}</p>
                   <p>Amount: {account.balance}</p>
                 </SelectItem>
@@ -83,6 +103,8 @@ export default function Withdraw({ tradingAccounts, user }: WithdrawProps) {
           <div className="flex flex-col gap-2">
             <h3 className="text-default-500 text-small">Amount</h3>
             <Input
+              value={amount}
+              onChange={(e) => setAmount(e.target.value)}
               isRequired
               name="amount"
               className="w-[400px]"
@@ -112,6 +134,9 @@ export default function Withdraw({ tradingAccounts, user }: WithdrawProps) {
           </div>
           <div>
             <Button
+              isDisabled={
+                !!selectedAccount && selectedAccount.balance < +amount
+              }
               isLoading={pending}
               type="submit"
               className="min-w-[400px]"

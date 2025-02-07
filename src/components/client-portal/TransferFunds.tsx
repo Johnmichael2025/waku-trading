@@ -4,8 +4,15 @@ import { TradingAccount } from "@/models/trading-account.model";
 import { Transaction } from "@/models/transaction.model";
 import { User } from "@/models/user.model";
 import { UserContext } from "@/providers/context";
+import { formatPrice } from "@/utils/format-price";
 import { Alert, Button, Chip, Input, Select, SelectItem } from "@heroui/react";
-import React, { useActionState, useContext, useEffect, useState } from "react";
+import React, {
+  useActionState,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { toast, ToastContainer } from "react-toastify";
 
 type TransferFundsProps = {
@@ -34,6 +41,13 @@ export default function TransferFunds({
   const onChangeAmount = (amount: string) => {
     setSelectedAmount(amount);
   };
+
+  const isValidAmount = useCallback(() => {
+    const account = tradingAccounts.find(
+      (account) => account.id === +selectedFromAccount
+    );
+    return !!account && account.balance < +selectedAmount;
+  }, [selectedAmount, selectedFromAccount, tradingAccounts]);
 
   useEffect(() => {
     if (state.success) {
@@ -70,6 +84,8 @@ export default function TransferFunds({
               From trading account
             </h3>
             <Select
+              errorMessage="The selected trading account has an insufficient balance to make a transfer to another account"
+              isInvalid={isValidAmount()}
               disabledKeys={[selectedToAccount]}
               value={selectedFromAccount}
               onChange={(e) => setSelectedFromAccount(e.target.value)}
@@ -79,7 +95,12 @@ export default function TransferFunds({
               label="Select"
             >
               {tradingAccounts.map((account) => (
-                <SelectItem key={account.id} textValue={account.name}>
+                <SelectItem
+                  key={account.id}
+                  textValue={`${account.name} - ${formatPrice(
+                    account.balance
+                  )}`}
+                >
                   <p className="font-bold">{account.name}</p>
                   <p>Amount: {account.balance}</p>
                 </SelectItem>
@@ -149,6 +170,7 @@ export default function TransferFunds({
           </div>
           <div>
             <Button
+              isDisabled={isValidAmount()}
               isLoading={pending}
               type="submit"
               className="min-w-[400px]"

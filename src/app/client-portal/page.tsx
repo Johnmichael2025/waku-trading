@@ -1,6 +1,6 @@
 "use client";
 import { Tabs, Tab } from "@heroui/react";
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Deposit from "@/components/client-portal/Deposit";
 import TransferFunds from "@/components/client-portal/TransferFunds";
 import Withdraw from "@/components/client-portal/Withdraw";
@@ -8,11 +8,21 @@ import { UserContext } from "@/providers/context";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { TRANSACTION_TYPE } from "@/enums/transaction-type.enum";
+import { formatPrice } from "@/utils/format-price";
 
 export default function Dashboard() {
   const { user, tradingAccounts } = useContext(UserContext);
   const searchParams = useSearchParams();
-  const defaultTab = searchParams?.get('transactionType') || TRANSACTION_TYPE.DEPOSIT
+  const defaultTab =
+    searchParams?.get("transactionType") || TRANSACTION_TYPE.DEPOSIT;
+  const [totalBalance, setTotalBalance] = useState(0);
+
+  useEffect(() => {
+    const total = tradingAccounts.reduce((acc, account) => {
+      return acc + account.balance;
+    }, 0);
+    setTotalBalance(total);
+  }, [tradingAccounts]);
 
   return (
     <>
@@ -48,7 +58,7 @@ export default function Dashboard() {
           <div className="flex-1 w-[40%]">
             <div className="flex bg-gray-200 justify-between p-4 rounded-sm">
               <div>
-                <strong>Total balance</strong>: 0.00 USD
+                <strong>Total balance</strong>: {formatPrice(totalBalance)}
               </div>
               <div>
                 <Link className="text-blue-500" href="/client-portal/trading">

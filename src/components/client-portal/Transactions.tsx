@@ -13,6 +13,12 @@ import {
   Button,
   RangeValue,
   DateValue,
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  useDisclosure,
 } from "@heroui/react";
 
 import clsx from "clsx";
@@ -22,6 +28,9 @@ import { Transaction } from "@/models/transaction.model";
 import Image from "next/image";
 import moment from "moment";
 import { TRANSACTION_TYPE } from "@/enums/transaction-type.enum";
+import { axiosInstance } from "@/lib/axios-instance";
+import { useSession } from "next-auth/react";
+import { ADMINS } from "@/constants/admins.constant";
 
 const getBGClass = (status: TRANSACTION_STATUS) => {
   switch (status) {
@@ -33,6 +42,8 @@ const getBGClass = (status: TRANSACTION_STATUS) => {
       return "bg-red-500";
   }
 };
+
+type ModalAction = "approve" | "reject" | null;
 
 const columns = [
   {
@@ -59,20 +70,41 @@ const columns = [
     key: "Status",
     label: "Status",
   },
+  {
+    key: "Actions",
+    label: "Actions",
+  },
 ];
 
 type TransactionsProps = {
-  tradingAccounts: TradingAccount[]
-  transactions: Transaction[]
+  tradingAccounts: TradingAccount[];
+  transactions: Transaction[];
 };
-export default function Transactions({ tradingAccounts, transactions }: TransactionsProps) {
-  const [filteredTransactions, setFilteredTransactions] =
-    useState<Transaction[]>(transactions);
+export default function Transactions({
+  tradingAccounts,
+  transactions,
+}: TransactionsProps) {
+  const session = useSession();
+  const [filteredTransactions, setFilteredTransactions] = useState<
+    Transaction[]
+  >(
+    transactions.map((t) => {
+      t.transferToAccount = tradingAccounts.find(
+        (account) => account.id === t.transferToAccountId
+      );
+      return t;
+    })
+  );
   const [selectedAccountId, setSelectedAccountId] = useState("");
   const [selectedStatus, setSelectedStatus] = useState("");
   const [selectedDateRange, setSelectedDateRange] =
     useState<RangeValue<DateValue> | null>(null);
   const [selectedTransactionType, setSelectedTransactionType] = useState("");
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const [modalAction, setModalAction] = useState<ModalAction>(null);
+  const [transactionToUpdate, setTransactionToUpdate] =
+    useState<Transaction | null>(null);
+  const [isProcessing, setIsProcessing] = useState(false);
   useEffect(() => {
     let _filteredTransactions = [...transactions];
     if (selectedAccountId) {
@@ -128,6 +160,32 @@ export default function Transactions({ tradingAccounts, transactions }: Transact
 
   const onChangeDateRange = (rangeValue: RangeValue<DateValue> | null) => {
     setSelectedDateRange(rangeValue);
+  };
+
+  const onOpenModal = (actionType: ModalAction, transaction: Transaction) => {
+    setModalAction(actionType);
+    setTransactionToUpdate(transaction);
+    onOpen();
+  };
+
+  const updateTransaction = async (
+    action: ModalAction,
+    transaction: Transaction,
+    closeModal: () => void
+  ) => {
+    setIsProcessing(true);
+    try {
+      const res = await axiosInstance.post("/api/transactions", {
+        action,
+        transaction,
+      });
+      console.log(res, "res");
+    } catch (err) {
+      console.log(err, "err");
+    } finally {
+      closeModal();
+      setIsProcessing(false);
+    }
   };
 
   return (
@@ -221,8 +279,14 @@ export default function Transactions({ tradingAccounts, transactions }: Transact
                   <TableCell>{transaction.transactionType}</TableCell>
                   <TableCell>{transaction.amount}</TableCell>
                   <TableCell>{transaction.tradingAccount?.name}</TableCell>
-                  <TableCell>{transaction.withdrawalType ? transaction.withdrawalType : 'N/A'}</TableCell>
-                  <TableCell>{moment(transaction.dateCreated).format('MMMM DD, YYYY')}</TableCell>
+                  <TableCell>
+                    {transaction.withdrawalType
+                      ? transaction.withdrawalType
+                      : "N/A"}
+                  </TableCell>
+                  <TableCell>
+                    {moment(transaction.dateCreated).format("MMMM DD, YYYY")}
+                  </TableCell>
                   <TableCell>
                     <span
                       className={clsx(
@@ -233,12 +297,74 @@ export default function Transactions({ tradingAccounts, transactions }: Transact
                       {transaction.status}
                     </span>
                   </TableCell>
+
+                  <TableCell>
+                    {ADMINS.includes(session?.data?.user?.email || "") && (
+                      <>
+                        <Button
+                          onPress={() => onOpenModal("approve", transaction)}
+                          variant="bordered"
+                          className="mr-4"
+                          size="sm"
+                          color="success"
+                        >
+                          Approve
+                        </Button>
+                        <Button
+                          onPress={() => onOpenModal("reject", transaction)}
+                          variant="bordered"
+                          size="sm"
+                          color="danger"
+                        >
+                          Reject
+                        </Button>
+                      </>
+                    )}
+                  </TableCell>
                 </TableRow>
               )}
             </TableBody>
           </Table>
         </>
       )}
+      <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalHeader className="flex flex-col gap-1">
+                {modalAction === "approve" ? "Approve" : "Reject"} Transaction
+              </ModalHeader>
+              <ModalBody>
+                <p>
+                  Are you sure you want to{" "}
+                  {modalAction === "approve" ? "Approve" : "Reject"} the
+                  transaction?
+                </p>
+              </ModalBody>
+              <ModalFooter>
+                <div className="flex justify-between">
+                  <Button color="danger" variant="light" onPress={onClose}>
+                    Cancel
+                  </Button>
+                  <Button
+                    isLoading={isProcessing}
+                    color="primary"
+                    onPress={() => {
+                      updateTransaction(
+                        modalAction,
+                        transactionToUpdate as Transaction,
+                        onClose
+                      );
+                    }}
+                  >
+                    Confirm
+                  </Button>
+                </div>
+              </ModalFooter>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
     </>
   );
 }

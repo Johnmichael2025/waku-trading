@@ -4,6 +4,7 @@ import { TradingAccount } from "@/models/trading-account.model";
 import Link from "next/link";
 import Image from "next/image";
 import { TRANSACTION_TYPE } from "@/enums/transaction-type.enum";
+import { formatPrice } from "@/utils/format-price";
 
 type TradingAccountsProps = {
   accounts: TradingAccount[];
@@ -54,13 +55,13 @@ export default function TradingAccounts({
                   <div className="flex justify-between">
                     <span className="text-sm font-light">Total balance</span>
                     <span className="text-sm font-medium">
-                      {account.balance} USD
+                      {formatPrice(account.balance)}
                     </span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-sm font-light">Credit</span>
                     <span className="text-sm font-medium">
-                      {account.credit} USD
+                      {formatPrice(account.balance)}
                     </span>
                   </div>
                   <div className="flex justify-between">
