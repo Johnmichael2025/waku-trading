@@ -1,11 +1,12 @@
+import prisma from "@/lib/prisma";
+import { TradingAccount } from "@/models/trading-account.model";
+
 export const getTradingAccounts = async () => {
-  console.log(process.env.NEXT_PUBLIC_API_BASE_URL, 'base url')
   try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/trading-accounts`
-    );
-    return await res.json();
-  } catch {
+    const accounts = await prisma.tradingAccount.findMany();
+    return accounts as unknown as TradingAccount[];
+  } catch (err) {
+    console.log(err, 'err');
     return [];
   }
 };

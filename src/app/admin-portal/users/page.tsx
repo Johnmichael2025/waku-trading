@@ -1,16 +1,19 @@
 import Users from "@/components/admin-portal/Users";
+import prisma from "@/lib/prisma";
 import { User } from "@/models/user.model";
 import React from "react";
 
 const getUsers = async () => {
-  console.log(process.env.NEXT_PUBLIC_API_BASE_URL, 'base url')
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/users`
-  );
-  return await res.json();
+  try {
+    const users = await prisma.user.findMany();
+    return users as unknown as User[];
+  } catch (err) {
+    console.log(err, 'err');
+    return [];
+  }
 };
 export default async function page() {
-  const users = (await getUsers()) as User[];
+  const users = await getUsers();
 
   return (
     <Users users={users} />
