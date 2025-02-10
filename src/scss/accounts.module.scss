@@ -62,3 +62,20 @@
     color: #fff;
   }
 }
+
+@media only screen and (max-width: 768px) {
+  .accounts-wrapper {
+    padding: 40px 15px;
+
+    .premium {
+      padding: 40px 25px;
+    }
+  }
+  .consult-us {
+    padding: 40px;
+    h1 {
+      padding: 0;
+      font-size: 2rem;
+    }
+  }
+}

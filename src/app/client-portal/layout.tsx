@@ -13,7 +13,7 @@ export default function ClientPortalLayout({
       <ClientPortalNavigation navLinks={CLIENT_PORTAL_NAVIGATION} />
       <UserProvider>
         <Suspense>
-          <div className="md:ml-[270px] md:pt-[150px] p-10">{children}</div>
+          <div className="md:ml-[270px] md:pt-[150px] p-5 md:p-10">{children}</div>
         </Suspense>
       </UserProvider>
     </>

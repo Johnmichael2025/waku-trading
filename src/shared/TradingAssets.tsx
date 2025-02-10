@@ -11,7 +11,7 @@ export default function TradingAssets() {
   return (
     <div className={styles['wrapper']}>
       <h1>You can trade the following assets</h1>
-      <div className="flex justify-between gap-4">
+      <div className="flex flex-col md:flex-row justify-between gap-4">
         {MARKETS.map((market) => (
           <div
             style={{ backgroundImage: `url(/markets/${market.imgUrl})` }}

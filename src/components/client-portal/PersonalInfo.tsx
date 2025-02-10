@@ -40,7 +40,7 @@ export default function PersonalInfo({ user }: PersonalInfoProps) {
       <form action={formAction}>
         <input type="hidden" name="user-id" value={user.id} />
         <div className="flex flex-col gap-6 mt-5">
-          <div className="flex flex-row gap-5">
+          <div className="flex flex-col md:flex-row gap-5">
             <div className="flex-1">
               <h3 className="text-default-500 text-small mb-4">First Name</h3>
               <Input
@@ -69,7 +69,7 @@ export default function PersonalInfo({ user }: PersonalInfoProps) {
               </Select>
             </div>
           </div>
-          <div className="flex flex-row gap-5">
+          <div className="flex flex-col md:flex-row gap-5">
             <div className="flex-1">
               <h3 className="text-default-500 text-small mb-4">Language</h3>
               <Select
@@ -95,7 +95,7 @@ export default function PersonalInfo({ user }: PersonalInfoProps) {
               <Input defaultValue={user.address} name="address" type="text" />
             </div>
           </div>
-          <div className="flex flex-row gap-5">
+          <div className="flex flex-col md:flex-row gap-5">
             <div className="flex-1">
               <h3 className="text-default-500 text-small mb-4">Country</h3>
               <Select
@@ -117,7 +117,7 @@ export default function PersonalInfo({ user }: PersonalInfoProps) {
               <Input defaultValue={user.postalCode} name="postal-code" type="text" />
             </div>
           </div>
-          <div className="flex flex-row gap-5">
+          <div className="flex flex-col md:flex-row gap-5">
             <div className="flex-1">
               <h3 className="text-default-500 text-small mb-4">
                 Country specific indentifier
@@ -153,7 +153,7 @@ export default function PersonalInfo({ user }: PersonalInfoProps) {
             <Button
               isLoading={pending}
               type="submit"
-              className="min-w-[300px]"
+              className="w-full md:w-auto md:min-w-[300px]"
               color="default"
             >
               Update Account

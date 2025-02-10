@@ -12,7 +12,7 @@ export default function page() {
         img="/faq-bg.jpg"
       />
       <section>
-        <div className="p-[80px]">
+        <div className="p-5 md:p-[80px]">
           {FAQS.map((faq, i) => (
             <FaqItem question={faq.q} answer={faq.a} key={i} />
           ))}

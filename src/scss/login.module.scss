@@ -43,3 +43,19 @@
     }
   }
 }
+
+@media only screen and (max-width: 768px) {
+  .bg-wrapper {
+    height: auto;
+    padding: 40px 20px;
+
+    .login-form {
+      min-width: auto;
+      padding: 20px;
+
+      h4, a {
+        font-size: 15px;
+      }
+    }
+  }
+}

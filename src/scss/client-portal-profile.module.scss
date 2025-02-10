@@ -38,3 +38,11 @@
     }
   }
 }
+
+@media screen and (max-width: 768px) {
+  .account-validation-wrapper {
+    p {
+      width: 100%;
+    }
+  }
+}

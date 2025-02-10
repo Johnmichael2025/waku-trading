@@ -64,3 +64,16 @@ h3 {
   background-color: var(--dark-blue);
   margin-top: 20px;
 }
+
+@media screen and (max-width: 768px) {
+  div[data-slot="base"], div[data-slot="base"] > div {
+    width: 100%;
+  }
+  div[data-slot="base"] {
+    max-width: 100%;
+  }
+  div[data-slot="tabList"] > button {
+    font-size: 13px;
+  }
+}
+

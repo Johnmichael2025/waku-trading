@@ -27,8 +27,8 @@ export default function Dashboard() {
   return (
     <>
       {user && (
-        <div className="flex flex-row justify-between">
-          <div className="flex flex-col w-[60%]">
+        <div className="flex flex-col-reverse md:flex-row justify-between gap-5">
+          <div className="flex flex-col w-full md:w-[60%]">
             <Tabs
               defaultSelectedKey={defaultTab}
               color="primary"
@@ -55,7 +55,7 @@ export default function Dashboard() {
               </Tab>
             </Tabs>
           </div>
-          <div className="flex-1 w-[40%]">
+          <div className="flex-1 w-full md:w-[40%]">
             <div className="flex bg-gray-200 justify-between p-4 rounded-sm">
               <div>
                 <strong>Total balance</strong>: {formatPrice(totalBalance)}

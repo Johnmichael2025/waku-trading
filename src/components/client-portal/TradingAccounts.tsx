@@ -20,7 +20,7 @@ export default function TradingAccounts({
       <div className="mt-4">
         <Button
           onPress={onAddAccount}
-          className="min-w-[300px]"
+          className="w-full md:w-auto md:min-w-[300px]"
           color="primary"
         >
           Create trading account
@@ -41,7 +41,7 @@ export default function TradingAccounts({
           {accounts.map((account) => (
             <Card
               key={account.id}
-              className="max-w-[400px] bg-green text-white p-4 mt-6"
+              className="w-full max-w-full md:max-w-[400px] bg-green text-white p-4 mt-6"
             >
               <CardHeader className="flex gap-3 rounded-sm">
                 <h3>{account.name}</h3>
@@ -77,18 +77,18 @@ export default function TradingAccounts({
                 </div>
               </CardBody>
               <CardFooter>
-                <div className="flex flex-col gap-4">
+                <div className="flex flex-1 flex-col gap-4">
                   <Link
                     href={`/client-portal?accountId=${account.id}&transactionType=${TRANSACTION_TYPE.DEPOSIT}`}
                   >
-                    <Button className="min-w-[350px]" color="default">
+                    <Button className="w-full md:w-auto md:min-w-[350px]" color="default">
                       Deposit
                     </Button>
                   </Link>
                   <Link
                     href={`/client-portal?accountId=${account.id}&transactionType=${TRANSACTION_TYPE.WITHDRAW}`}
                   >
-                    <Button className="min-w-[350px]" color="primary">
+                    <Button className="w-full md:w-auto md:min-w-[350px]" color="primary">
                       Withdraw
                     </Button>
                   </Link>

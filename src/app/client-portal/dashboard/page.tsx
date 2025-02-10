@@ -8,10 +8,10 @@ export default function ClientDashboard() {
   return (
     <>
       <div className="flex justify-between">
-        <span>
+        <span className="text-sm md:text-medium">
           <strong>Total transactions</strong>: {transactions.length}
         </span>
-        <span>
+        <span className="text-sm md:text-medium">
           <strong>Total balance</strong>: 0.00 USD
         </span>
       </div>

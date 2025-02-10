@@ -35,7 +35,7 @@ export default function Home() {
       </section>
       <section>
         <div className={styles.professionalism}>
-          <div className="flex flex-row justify-between">
+          <div className="flex flex-col md:flex-row justify-between">
             <div className="flex-1">
               <h3>PROFESSIONALISM</h3>
               <h1>We are confident in what we do and proud of the result</h1>
@@ -45,7 +45,7 @@ export default function Home() {
             </div>
             <div className="flex-1">
               <div className="flex flex-col gap-6">
-                <div className="flex flex-row gap-6">
+                <div className="flex flex-col md:flex-row gap-6 mt-6">
                   <div className="flex-1">
                     <Image
                       width={50}
@@ -67,7 +67,7 @@ export default function Home() {
                     <p>Our company adheres to all standards</p>
                   </div>
                 </div>
-                <div className="flex flex-row gap-6">
+                <div className="flex flex-col md:flex-row gap-6">
                   <div className="flex-1">
                     <Image
                       width={50}
@@ -98,7 +98,7 @@ export default function Home() {
         </div>
       </section>
       <section>
-        <div className="flex flex-row">
+        <div className="flex flex-col md:flex-row">
           <div className={styles.platform}>
             <div>
               <h3>PLATFORM</h3>

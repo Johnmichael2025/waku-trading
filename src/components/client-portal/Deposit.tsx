@@ -47,7 +47,7 @@ export default function Deposit({ tradingAccounts, user }: DepositProps) {
   return (
     <>
       <h3>Depositing to your trading account</h3>
-      <Alert color="primary" className="my-4 w-[400px]">
+      <Alert color="primary" className="my-4 w-full md:w-[400px]">
         Simply deposit to one of your trading accounts by selecting it from the
         list choosing a payment method and defining the desired deposit amount.
       </Alert>
@@ -75,7 +75,7 @@ export default function Deposit({ tradingAccounts, user }: DepositProps) {
               defaultSelectedKeys={defaultAccountId ? [defaultAccountId] : ""}
               isRequired
               name="trading-account-id"
-              className="w-[400px]"
+              className="w-full md:w-[400px]"
               label="Select trading account"
             >
               {tradingAccounts.map((account) => (
@@ -93,17 +93,17 @@ export default function Deposit({ tradingAccounts, user }: DepositProps) {
               onChange={(e) => setSelectedAmount(e.target.value)}
               isRequired
               name="amount"
-              className="w-[400px]"
+              className="w-full md:w-[400px]"
               label="Amount"
               description="Please enter the amount in USD"
               type="number"
             />
           </div>
-          <div className="flex flex-row gap-6">
+          <div className="flex flex-row items-center justify-center md:items-start md:justify-start gap-6">
             <div>
               <Chip
                 onClick={() => onChangeAmount("250")}
-                className="p-4 cursor-pointer min-w-[100px] text-center"
+                className="p-4 cursor-pointer min-w-[90px] text-center"
                 color="primary"
               >
                 250
@@ -112,7 +112,7 @@ export default function Deposit({ tradingAccounts, user }: DepositProps) {
             <div>
               <Chip
                 onClick={() => onChangeAmount("500")}
-                className="p-4 cursor-pointer min-w-[100px] text-center"
+                className="p-4 cursor-pointer min-w-[90px] text-center"
                 color="primary"
               >
                 500
@@ -121,7 +121,7 @@ export default function Deposit({ tradingAccounts, user }: DepositProps) {
             <div>
               <Chip
                 onClick={() => onChangeAmount("1000")}
-                className="p-4 cursor-pointer min-w-[100px] text-center"
+                className="p-4 cursor-pointer min-w-[90px] text-center"
                 color="primary"
               >
                 1000
@@ -132,7 +132,7 @@ export default function Deposit({ tradingAccounts, user }: DepositProps) {
             <Button
               isLoading={pending}
               type="submit"
-              className="min-w-[400px]"
+              className="w-full md:w-auto md:min-w-[400px]"
               color="default"
             >
               Deposit

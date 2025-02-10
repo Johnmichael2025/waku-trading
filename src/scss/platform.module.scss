@@ -137,3 +137,43 @@
     margin-bottom: 20px;
   }
 }
+
+@media screen and (max-width: 768px) {
+  .faq-wrapper {
+    padding: 20px;
+  }
+  .best-term {
+    width: 100%;
+  }
+  .market-analysis {
+    flex-direction: column;
+    text-align: center;
+
+    .background-area {
+      padding: 20px;
+    }
+
+    .background-area, .trading-widget-wrapper {
+      width: 100%;
+
+      h1 {
+        font-size: 2rem;
+      }
+    }
+
+    .trading-widget-wrapper {
+      padding: 20px;
+      & > div {
+        padding: 15px;
+      }
+    }
+  }
+  .image-text-section {
+    padding: 20px;
+    text-align: center;
+
+    h1 {
+      font-size: 2rem;
+    }
+  }
+}

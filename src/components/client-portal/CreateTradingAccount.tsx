@@ -59,11 +59,11 @@ export default function CreateTradingAccount({
     <>
       <h3>Creating a commercial account</h3>
       {accountsLength < 2 ? (
-        <Alert color="primary" className="my-4 w-[400px]">
+        <Alert color="primary" className="my-4 w-full md:w-[400px]">
           For maximum flexibility you can produce to 2 live trading accounts.
         </Alert>
       ) : (
-        <Alert color="warning" className="my-4 w-[400px]">
+        <Alert color="warning" className="my-4 w-full md:w-[400px]">
           You have reached a maximum of 2 live trading accounts.
         </Alert>
       )}
@@ -80,7 +80,7 @@ export default function CreateTradingAccount({
             </h3>
             <Input
               isRequired
-              className="w-[400px]"
+              className="w-full md:w-[400px]"
               label="Name your commercial account"
               type="text"
               name="account-name"
@@ -91,7 +91,7 @@ export default function CreateTradingAccount({
             <Select
               name="currency"
               isRequired
-              className="w-[400px]"
+              className="w-full md:w-[400px]"
               label="Select trading account"
             >
               {currencyList.map((currency) => (
@@ -107,7 +107,7 @@ export default function CreateTradingAccount({
               isLoading={pending}
               isDisabled={accountsLength >= 2}
               type="submit"
-              className="min-w-[400px]"
+              className="w-full md:w-auto md:min-w-[400px]"
               color="default"
             >
               Set up account

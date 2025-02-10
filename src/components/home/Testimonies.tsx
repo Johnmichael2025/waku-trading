@@ -11,7 +11,7 @@ import Image from "next/image";
 
 export default function Testimonies() {
   return (
-    <div className="flex gap-10">
+    <div className="flex flex-col md:flex-row gap-10">
       <div className={styles["testimonial-bg"]}></div>
       <div className={styles["testimonies-wrapper"]}>
         <h3>Reviews</h3>

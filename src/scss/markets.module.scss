@@ -42,4 +42,21 @@
   padding: 80px;
 }
 
+@media only screen and (max-width: 768px) {
+  .market-sections {
+    padding: 20px;
+  }
+  .image-text-section {
+    padding: 20px;
+
+    h1 {
+      text-align: center;
+      font-size: 2rem;
+    }
+  }
+  .trading-widget {
+    padding: 20px;
+  }
+}
+
 

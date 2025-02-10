@@ -59,7 +59,7 @@ export default function TransferFunds({
   return (
     <>
       <h3>Transfering funds between your trading accounts</h3>
-      <Alert color="primary" className="my-4 w-[400px]">
+      <Alert color="primary" className="my-4 w-full md:w-[400px]">
         Transfered funds will immediately be converted and credited to your
         trading account.
       </Alert>
@@ -91,7 +91,7 @@ export default function TransferFunds({
               onChange={(e) => setSelectedFromAccount(e.target.value)}
               name="trading-account-id"
               isRequired
-              className="w-[400px]"
+              className="w-full md:w-[400px]"
               label="Select"
             >
               {tradingAccounts.map((account) => (
@@ -115,7 +115,7 @@ export default function TransferFunds({
               onChange={(e) => setSelectedToAccount(e.target.value)}
               name="to-trading-account-id"
               isRequired
-              className="w-[400px]"
+              className="w-full md:w-[400px]"
               label="Select"
             >
               {tradingAccounts.map((account) => (
@@ -133,13 +133,13 @@ export default function TransferFunds({
               onChange={(e) => setSelectedAmount(e.target.value)}
               isRequired
               name="amount"
-              className="w-[400px]"
+              className="w-full md:w-[400px]"
               label="Amount"
               description="Please enter the amount in USD"
               type="number"
             />
           </div>
-          <div className="flex flex-row gap-6">
+          <div className="flex flex-row items-center justify-center md:items-start md:justify-start gap-6">
             <div>
               <Chip
                 onClick={() => onChangeAmount("250")}
@@ -173,7 +173,7 @@ export default function TransferFunds({
               isDisabled={isValidAmount()}
               isLoading={pending}
               type="submit"
-              className="min-w-[400px]"
+              className="w-full md:w-auto md:min-w-[400px]"
               color="default"
             >
               Transfer funds

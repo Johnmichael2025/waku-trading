@@ -17,7 +17,7 @@ export default function page() {
         img="/economic-calendar-bg.jpg"
       />
       <section className={styles["image-text-section"]}>
-        <div className="flex items-center gap-10">
+        <div className="flex flex-col md:flex-row items-center gap-10">
           <div className="flex-1">
             <Image
               src={webTraderImg}
@@ -37,7 +37,7 @@ export default function page() {
         </div>
       </section>
       <section>
-        <div className="flex flex-wrap gap-5 p-10 items-center justify-center">
+        <div className="flex flex-col md:flex-row flex-wrap gap-5 p-5 md:p-10 items-center justify-center">
           {BEST_TERMS.map((term, i) => (
             <div
               className={clsx(styles["best-term"], styles[`term-${i + 1}`])}
@@ -58,7 +58,7 @@ export default function page() {
         </div>
       </section>
       <section className={styles["image-text-section"]}>
-        <div className="flex items-center gap-10">
+        <div className="flex flex-col md:flex-row items-center gap-10">
           <div className="flex-1">
             <h1>Experience trading on WebTrader</h1>
             <p>

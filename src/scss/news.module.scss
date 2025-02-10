@@ -8,3 +8,9 @@
   opacity: 0.9;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
+
+@media only screen and (max-width: 768px) {
+  .trading-widget {
+    padding: 20px;
+  }
+}

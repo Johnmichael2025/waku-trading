@@ -17,7 +17,7 @@ export default function page() {
         img="/economic-calendar-bg.jpg"
       />
       <section className={styles["accounts-wrapper"]}>
-        <div className="flex flex-wrap gap-10 justify-center items-center">
+        <div className="flex flex-col md:flex-row flex-wrap gap-10 justify-center items-center">
           {PREMIUM_ACCOUNTS.map((account, i) => (
             <div className={styles.premium} key={i}>
               <h3>{account.premium}</h3>

@@ -25,7 +25,7 @@ export default function Markets({
   return (
     <>
       <section className={styles["image-text-section"]}>
-        <div className="flex items-center gap-10">
+        <div className="flex flex-col md:flex-row items-center gap-10">
           <div className="flex-1">
             <Image
               src={howItWorks.img}
@@ -49,7 +49,7 @@ export default function Markets({
         ></iframe>
       </section>
       <section className={styles["image-text-section"]}>
-        <div className="flex items-center gap-10">
+        <div className="flex flex-col md:flex-row items-center gap-10">
           <div className="flex-1">
             <h1>{howToStart.title}</h1>
             {howToStart.paragraph}

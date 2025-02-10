@@ -24,8 +24,8 @@ export default function Trading() {
     <>
       {user && (
         <div>
-          <div className="float-end">
-            <div className="bg-gray-200 p-4 relative text-center w-[250px]">
+          <div className="float-end mb-4 w-full">
+            <div className="bg-gray-200 p-4 relative text-center w-full md:w-[250px]">
               <strong>Total balance</strong>: {formatPrice(totalBalance)}
             </div>
           </div>
@@ -50,7 +50,7 @@ export default function Trading() {
             </Tab>
             <Tab
               key={TRADING_TABS.CREATE_ACCOUNT}
-              title="Create Trading account"
+              title="Create account"
             >
               <CreateTradingAccount
                 user={user}

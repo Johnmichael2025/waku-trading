@@ -80,7 +80,7 @@ export default function ChangePassword({ user }: ChangePasswordProps) {
             <Button
               isLoading={pending}
               type="submit"
-              className="min-w-[300px]"
+              className="w-full md:w-auto md:min-w-[300px]"
               color="default"
             >
               Change Password

@@ -58,7 +58,7 @@ export default function LoginForm() {
         </Button>
       </div>
 
-      <div className="flex justify-between mt-6">
+      <div className="flex flex-col md:flex-row justify-between mt-6">
         <h4>
           Don&apos;t have an account? &nbsp;
           <Link href="/sign-up">Sign up</Link>

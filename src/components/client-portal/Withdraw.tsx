@@ -52,7 +52,7 @@ export default function Withdraw({ tradingAccounts, user }: WithdrawProps) {
   return (
     <>
       <h3>Withdrawing from trading account</h3>
-      <Alert color="primary" className="my-4 w-[400px]">
+      <Alert color="primary" className="my-4 w-full md:w-[400px]">
         Total deductions request from one of your trading accounts by selecting
         an account from the list choosing a payment account and defining the
         desired withdrawal amount.
@@ -84,7 +84,7 @@ export default function Withdraw({ tradingAccounts, user }: WithdrawProps) {
               defaultSelectedKeys={defaultAccountId ? [defaultAccountId] : ""}
               isRequired
               name="trading-account-id"
-              className="w-[400px]"
+              className="w-full md:w-[400px]"
               label="Select trading account"
             >
               {tradingAccounts.map((account) => (
@@ -107,7 +107,7 @@ export default function Withdraw({ tradingAccounts, user }: WithdrawProps) {
               onChange={(e) => setAmount(e.target.value)}
               isRequired
               name="amount"
-              className="w-[400px]"
+              className="w-full md:w-[400px]"
               label="Amount"
               description="Please enter the amount in USD"
               type="number"
@@ -118,7 +118,7 @@ export default function Withdraw({ tradingAccounts, user }: WithdrawProps) {
             <Select
               isRequired
               name="withdrawal-type"
-              className="w-[400px]"
+              className="w-full md:w-[400px]"
               label="Select trading account"
             >
               <SelectItem key="Credit Card">Credit card</SelectItem>
@@ -126,7 +126,7 @@ export default function Withdraw({ tradingAccounts, user }: WithdrawProps) {
               <SelectItem key="Wire">Wire</SelectItem>
             </Select>
           </div>
-          <div className="bg-green w-[400px] rounded-md p-4">
+          <div className="bg-green w-full md:w-[400px] rounded-md p-4">
             <p className="text-white text-sm">
               Note: Total withdrawal request will be reviewed by our operator
               within 24 hours.
@@ -139,7 +139,7 @@ export default function Withdraw({ tradingAccounts, user }: WithdrawProps) {
               }
               isLoading={pending}
               type="submit"
-              className="min-w-[400px]"
+              className="w-full md:w-auto md:min-w-[400px]"
               color="default"
             >
               Withdraw

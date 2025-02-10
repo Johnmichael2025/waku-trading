@@ -208,3 +208,54 @@
     color: #fff;
   }
 }
+
+@media screen and (max-width: 768px) {
+  .home-banner {
+    padding: 30px;
+    padding-top: 60px;
+    height: 600px;
+
+    .intro-texts {
+      padding: 15px;
+      text-align: center;
+
+      h1 {
+        font-size: 2.5rem;
+      }
+    }
+  }
+  .professionalism {
+    padding: 20px;
+
+    h1 {
+      width: 100%;
+      font-size: 2rem;
+    }
+  }
+  .benefits {
+    flex-direction: column;
+    margin: 20px 0;
+
+    .box-item {
+      width: 100%;
+    }
+  }
+  .signup-wrapper {
+    h1 {
+      padding: 20px;
+      font-size: 2rem;
+    }
+  }
+  .platform {
+    padding: 40px;
+
+    & > div {
+      width: 100%;
+    }
+  }
+
+  .benefits-section .trading-widget-wrapper {
+    padding: 0;
+    margin: 0;
+  }
+}

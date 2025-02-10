@@ -67,3 +67,10 @@
     font-weight: 600;
   }
 }
+
+@media screen and (max-width: 768px) {
+  .testimonies-wrapper {
+    padding: 20px;
+    width: 100%;
+  }
+}

@@ -202,7 +202,7 @@ export default function Transactions({
         </div>
       ) : (
         <>
-          <div className="flex justify-end gap-4 my-6">
+          <div className="flex flex-col md:flex-row justify-end gap-4 my-6">
             <div className="flex-1">
               <Select
                 selectedKeys={[selectedAccountId]}

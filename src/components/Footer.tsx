@@ -16,7 +16,7 @@ export default function Footer() {
       <footer
         className={clsx(
           styles.footer,
-          pathname?.includes("client-portal") ? "ml-[270px] mt-10" : ""
+          pathname?.includes("client-portal") ? "m-0 md:ml-[270px] mt-10" : ""
         )}
       >
         <Link href="/" rel="home">

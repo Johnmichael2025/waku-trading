@@ -63,7 +63,7 @@ export default function Statistics() {
           <p>Deposits are free of charge</p>
         </div>
       </div>
-      <div className="flex justify-around mt-20 gap-10">
+      <div className="flex flex-col md:flex-row justify-around mt-20 gap-10">
         <div className="flex-1">
           <Image
             className="w-full"

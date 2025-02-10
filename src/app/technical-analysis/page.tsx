@@ -11,7 +11,7 @@ export default function page() {
       />
       <section className={styles["widgets-container"]}>
         <div className="flex flex-col gap-6">
-          <div className="flex flex-row gap-8">
+          <div className="flex flex-col md:flex-row gap-8">
             <div className={styles['trading-widget']}>
               <iframe
                 height={450}
@@ -29,7 +29,7 @@ export default function page() {
               ></iframe>
             </div>
           </div>
-          <div className="flex flex-row gap-8">
+          <div className="flex flex-col md:flex-row gap-8">
             <div className={styles['trading-widget']}>
               <iframe
                 height={450}
@@ -47,7 +47,7 @@ export default function page() {
               ></iframe>
             </div>
           </div>
-          <div className="flex flex-row gap-8">
+          <div className="flex flex-col md:flex-row gap-8">
             <div className={styles['trading-widget']}>
               <iframe
                 height={450}

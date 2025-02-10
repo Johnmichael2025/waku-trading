@@ -14,7 +14,7 @@ export default function page() {
         img="/contact-us/support-bg.jpg"
       />
       <section>
-        <div className="flex flex-wrap gap-5 p-20 items-center justify-center">
+        <div className="flex flex-col md:flex-row flex-wrap gap-5 p-5 md:p-20 items-center justify-center">
           <div
             className={clsx(styles["contact-item"], styles["opening-hours"])}
           >

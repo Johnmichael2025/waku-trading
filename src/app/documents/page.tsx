@@ -17,7 +17,7 @@ export default function page() {
         description="Alphabourse provides detailed information about its terms and conditions. Before cooperating with us, we recommend that you examine this documentation to understand our policies."
         img="/documents/legal-documents.jpg"
       />
-      <div className="flex flex-wrap gap-5 p-10 items-center justify-center">
+      <div className="flex flex-col md:flex-row flex-wrap gap-5 p-5 md:p-10 items-center justify-center">
         {DOCUMENTS.map((document) => (
           <div className={styles["document-item"]} key={document.label}>
             <h2>{document.label}</h2>
