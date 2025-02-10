@@ -113,7 +113,7 @@ export default function Home() {
               </Link>
             </div>
           </div>
-          <div className={clsx("flex-1 p-10", styles.options)}>
+          <div className={clsx("flex-1 p-5 md:p-10", styles.options)}>
             <h3 className="text-white font-medium">OPTIONS</h3>
             <h1 className="mt-4">What you get with</h1>
             <h1>WebTrader</h1>
@@ -144,7 +144,7 @@ export default function Home() {
         <Statistics />
       </section>
       <section>
-        <div className={clsx("p-10 mt-10", styles["benefits-section"])}>
+        <div className={clsx("p-0 md:p-10 mt-10", styles["benefits-section"])}>
           <div className={styles["benefits-intro"]}>
             <h3 className="mb-4">OUR BENEFITS</h3>
             <h1>Alphabourse provides numerous</h1>

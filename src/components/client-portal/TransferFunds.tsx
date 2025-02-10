@@ -143,7 +143,7 @@ export default function TransferFunds({
             <div>
               <Chip
                 onClick={() => onChangeAmount("250")}
-                className="p-4 cursor-pointer min-w-[100px] text-center"
+                className="p-4 cursor-pointer min-w-[90px] text-center"
                 color="primary"
               >
                 250
@@ -152,7 +152,7 @@ export default function TransferFunds({
             <div>
               <Chip
                 onClick={() => onChangeAmount("500")}
-                className="p-4 cursor-pointer min-w-[100px] text-center"
+                className="p-4 cursor-pointer min-w-[90px] text-center"
                 color="primary"
               >
                 500
@@ -161,7 +161,7 @@ export default function TransferFunds({
             <div>
               <Chip
                 onClick={() => onChangeAmount("1000")}
-                className="p-4 cursor-pointer min-w-[100px] text-center"
+                className="p-4 cursor-pointer min-w-[90px] text-center"
                 color="primary"
               >
                 1000
