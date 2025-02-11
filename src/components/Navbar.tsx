@@ -44,7 +44,10 @@ export default function Navbar() {
 
   return (
     <>
-      <div className="flex md:hidden justify-between p-4">
+      <div
+        style={{ boxShadow: "0px 0px 5px 2px rgba(0, 0, 0, 0.3)" }}
+        className="flex md:hidden justify-between p-4"
+      >
         <Link href="/" rel="home">
           <Image width={80} height={80} src={logoImg} alt="Logo" />
         </Link>
@@ -141,39 +144,55 @@ export default function Navbar() {
           {(onClose) => (
             <>
               <DrawerBody className="pt-10">
-              <ul className="flex flex-col gap-5">
-                {NAV_ITEMS.map((item) => (
-                  <NavItemMobile onClose={(onClose)} key={item.label} item={item as NavItem} />
-                ))}
-                {status !== "authenticated" ? (
-                  <div>
-                    <li onClick={() => onClose()} className="border-b-1 border-[rgba(0, 0, 0, .06)] py-2">
-                      <Link href="/login">Login</Link>
-                    </li>
-                    <li onClick={() => onClose()} className="border-b-1 border-[rgba(0, 0, 0, .06)] py-2">
-                      <Link href="/sign-up">Sign up</Link>
-                    </li>
-                  </div>
-                ) : (
-                  <>
-                    {!isClientPortal(pathname) && (
-                      <li onClick={() => onClose()} className="border-b-1 border-[rgba(0, 0, 0, .06)] py-2">
-                        {ADMINS.includes(session.data.user?.email || "") ? (
-                          <Link href="/admin-portal">Admin Portal</Link>
-                        ) : (
-                          <Link href="/client-portal">Client Portal</Link>
-                        )}
+                <ul className="flex flex-col gap-5">
+                  {NAV_ITEMS.map((item) => (
+                    <NavItemMobile
+                      onClose={onClose}
+                      key={item.label}
+                      item={item as NavItem}
+                    />
+                  ))}
+                  {status !== "authenticated" ? (
+                    <div>
+                      <li
+                        onClick={() => onClose()}
+                        className="border-b-1 border-[rgba(0, 0, 0, .06)] py-2"
+                      >
+                        <Link href="/login">Login</Link>
                       </li>
-                    )}
+                      <li
+                        onClick={() => onClose()}
+                        className="border-b-1 border-[rgba(0, 0, 0, .06)] py-2"
+                      >
+                        <Link href="/sign-up">Sign up</Link>
+                      </li>
+                    </div>
+                  ) : (
+                    <>
+                      {!isClientPortal(pathname) && (
+                        <li
+                          onClick={() => onClose()}
+                          className="border-b-1 border-[rgba(0, 0, 0, .06)] py-2"
+                        >
+                          {ADMINS.includes(session.data.user?.email || "") ? (
+                            <Link href="/admin-portal">Admin Portal</Link>
+                          ) : (
+                            <Link href="/client-portal">Client Portal</Link>
+                          )}
+                        </li>
+                      )}
 
-                    <li onClick={() => onClose()} className="border-b-1 border-[rgba(0, 0, 0, .06)] py-2">
-                      <Link onClick={onLogout} href="#">
-                        Logout
-                      </Link>
-                    </li>
-                  </>
-                )}
-              </ul>
+                      <li
+                        onClick={() => onClose()}
+                        className="border-b-1 border-[rgba(0, 0, 0, .06)] py-2"
+                      >
+                        <Link onClick={onLogout} href="#">
+                          Logout
+                        </Link>
+                      </li>
+                    </>
+                  )}
+                </ul>
               </DrawerBody>
             </>
           )}
