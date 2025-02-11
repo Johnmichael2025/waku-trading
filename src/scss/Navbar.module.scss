@@ -8,18 +8,18 @@
   &.sticky {
     position: fixed;
     background-color: #fff;
-    box-shadow: rgba(0, 0, 0, 0.30) 0px 4px 8px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 4px 8px;
     padding-top: 10px;
 
     ul.parent-list > li > a {
-      color: #101010!important;
+      color: #101010 !important;
 
       &::after {
-        color: #101010!important;
+        color: #101010 !important;
       }
     }
     ul.parent-list > li:hover > a::after {
-      color: #101010!important;
+      color: #101010 !important;
     }
   }
 }
@@ -133,11 +133,43 @@
       position: relative;
       right: 250px;
       & > ul > li > a {
-        color: #101010!important;
-        font-size: 15px!important;
+        color: #101010 !important;
+        font-size: 15px !important;
       }
     }
   }
+}
+
+.drawerContent {
+  :global {
+    .sub-menu {
+      // transform: translateY(0);
+      transition: all 0.3s ease-out;
+      line-height: 0;
+      padding: 0 1em;
+      color: transparent;
+
+      &.expanded {
+        line-height: 1.5;
+        padding-top: 1em;
+        padding-bottom: 1em;
+        color: black;
+
+        li:not(:last-child) {
+          padding: 10px;
+          border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+        }
+
+        li:last-child {
+          padding: 10px;
+        }
+        // transform: translateY(100%);
+      }
+    }
+  }
+  // li {
+  //   border-bottom: 1px solid rgba(0, 0, 0, .06);
+  // }
 }
 
 @media only screen and (max-width: 768px) {
