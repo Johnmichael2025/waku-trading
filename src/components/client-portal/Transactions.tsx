@@ -79,10 +79,12 @@ const columns = [
 type TransactionsProps = {
   tradingAccounts: TradingAccount[];
   transactions: Transaction[];
+  hideTitle?: boolean;
 };
 export default function Transactions({
   tradingAccounts,
   transactions,
+  hideTitle,
 }: TransactionsProps) {
   const session = useSession();
   const [filteredTransactions, setFilteredTransactions] = useState<
@@ -261,7 +263,12 @@ export default function Transactions({
             </div>
           </div>
           <div className="flex justify-between mt-4">
-            <h3 className="font-semibold text-medium">General Transactions</h3>
+            {!hideTitle && (
+              <h3 className="font-semibold text-medium">
+                General Transactions
+              </h3>
+            )}
+
             <Button onPress={resetFilters} size="sm">
               Reset filters
             </Button>
@@ -300,7 +307,7 @@ export default function Transactions({
 
                   <TableCell>
                     {ADMINS.includes(session?.data?.user?.email || "") && (
-                      <>
+                      <div className="flex gap-2">
                         <Button
                           onPress={() => onOpenModal("approve", transaction)}
                           variant="bordered"
@@ -318,7 +325,7 @@ export default function Transactions({
                         >
                           Reject
                         </Button>
-                      </>
+                      </div>
                     )}
                   </TableCell>
                 </TableRow>

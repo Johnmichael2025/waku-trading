@@ -6,8 +6,8 @@ export default async function page() {
   const tradingAccounts = await getTradingAccounts();
 
   return (
-    <>
+    <div className="pb-[60px]">
       <TradingAccounts accounts={tradingAccounts} />
-    </>
+    </div>
   );
 }

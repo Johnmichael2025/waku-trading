@@ -11,7 +11,7 @@ const getTransactions = async () => {
         tradingAccount: true,
       },
       orderBy: {
-        dateCreated: 'desc'
+        dateCreated: "desc",
       },
     });
     return transactions as unknown as Transaction[];
@@ -25,12 +25,11 @@ export default async function page() {
   const tradingAccounts = await getTradingAccounts();
 
   return (
-    <>
+    <div className="pb-[60px]">
       <Transactions
         transactions={transactions}
         tradingAccounts={tradingAccounts}
       />
-      
-    </>
+    </div>
   );
 }

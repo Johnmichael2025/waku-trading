@@ -8,7 +8,7 @@ const getUsers = async () => {
     const users = await prisma.user.findMany();
     return users as unknown as User[];
   } catch (err) {
-    console.log(err, 'err');
+    console.log(err, "err");
     return [];
   }
 };
@@ -16,6 +16,8 @@ export default async function page() {
   const users = await getUsers();
 
   return (
-    <Users users={users} />
+    <div className="pb-[60px]">
+      <Users users={users} />
+    </div>
   );
 }

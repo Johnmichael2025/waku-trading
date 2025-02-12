@@ -65,6 +65,10 @@ h3 {
   margin-top: 20px;
 }
 
+nextjs-portal {
+  display: none;
+}
+
 @media screen and (max-width: 768px) {
   div[data-slot="base"], div[data-slot="base"] > div {
     width: 100%;
