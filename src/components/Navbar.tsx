@@ -107,10 +107,10 @@ export default function Navbar() {
                 ))}
                 {status !== "authenticated" ? (
                   <>
-                    <li className="border-b-1 border-[rgba(0, 0, 0, .06)] py-2">
+                    <li>
                       <Link href="/login">Login</Link>
                     </li>
-                    <li className="border-b-1 border-[rgba(0, 0, 0, .06)] py-2">
+                    <li>
                       <Link href="/sign-up">Sign up</Link>
                     </li>
                   </>
