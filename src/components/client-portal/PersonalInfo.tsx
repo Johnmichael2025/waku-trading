@@ -78,10 +78,10 @@ export default function PersonalInfo({ user }: PersonalInfoProps) {
                 name="language"
                 label="Language"
               >
-                <SelectItem key="english">English</SelectItem>
-                <SelectItem key="french">French</SelectItem>
-                <SelectItem key="italian">Italian</SelectItem>
-                <SelectItem key="german">German</SelectItem>
+                <SelectItem key="English">English</SelectItem>
+                <SelectItem key="French">French</SelectItem>
+                <SelectItem key="Italian">Italian</SelectItem>
+                <SelectItem key="German">German</SelectItem>
               </Select>
             </div>
             <div className="flex-1">
