@@ -43,6 +43,7 @@ model TradingAccount {
   userId Int
   server String?
   leverage String?
+  dateCreated String?
   transactions Transaction[]
 }
 

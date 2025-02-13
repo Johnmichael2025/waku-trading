@@ -76,7 +76,7 @@ export default function Navbar() {
             <div className="col-cell header-logo">
               <div className="logo-area sticky-logo">
                 <Link href="/" rel="home">
-                  <Image width={100} height={50} src={logoImg} alt="Logo" />
+                  <Image width={80} height={50} src={logoImg} alt="Logo" />
                 </Link>
               </div>
             </div>

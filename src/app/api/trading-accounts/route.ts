@@ -3,7 +3,14 @@ import { NextResponse } from "next/server";
 
 export async function GET() {
   try {
-    const accounts = await prisma.tradingAccount.findMany();
+    const accounts = await prisma.tradingAccount.findMany({
+      orderBy: {
+        id: "desc",
+      },
+      include: {
+        user: true
+      }
+    });
     return NextResponse.json(accounts);
   } catch (err) {
     console.log(err, 'err');

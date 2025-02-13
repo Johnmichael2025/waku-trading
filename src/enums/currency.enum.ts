@@ -1,6 +1,6 @@
 export enum CURRENCY {
   USD = 'USD',
   EURO = 'EURO',
-  CRYPTO = 'Cypto',
+  CRYPTO = 'Crypto',
   WIRE = 'Wire'
 }

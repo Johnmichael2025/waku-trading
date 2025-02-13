@@ -11,10 +11,18 @@ import {
   TableColumn,
   TableHeader,
   TableRow,
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  useDisclosure,
 } from "@heroui/react";
 import moment from "moment";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
+import EditIcon from "@mui/icons-material/Edit";
+import TradingAccountForm from "./TradingAccountForm";
 
 const columns = [
   {
@@ -30,8 +38,16 @@ const columns = [
     label: "Balance",
   },
   {
+    key: "user",
+    label: "User"
+  },
+  {
     key: "credit",
     label: "Credit",
+  },
+  {
+    key: "currency",
+    label: "Currency",
   },
   {
     key: "server",
@@ -44,6 +60,10 @@ const columns = [
   {
     key: "dateCreated",
     label: "Date Created",
+  },
+  {
+    key: "actions",
+    label: "Actions",
   },
 ];
 
@@ -63,6 +83,9 @@ export default function TradingAccounts({ accounts }: TradingAccountsProps) {
   const resetFilters = () => {
     setSelectedDateRange(null);
   };
+  const [tradingAccountToUpdate, setTradingAccountToUpdate] =
+    useState<TradingAccount | null>(null);
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   useEffect(() => {
     let _filteredTradingAccounts = [...accounts];
@@ -88,6 +111,11 @@ export default function TradingAccounts({ accounts }: TradingAccountsProps) {
     }
     setFilteredTradingAccounts(_filteredTradingAccounts);
   }, [accounts, selectedDateRange]);
+
+  const onOpenModal = (tradingAccount: TradingAccount) => {
+    setTradingAccountToUpdate(tradingAccount);
+    onOpen();
+  };
 
   return (
     <>
@@ -180,11 +208,18 @@ export default function TradingAccounts({ accounts }: TradingAccountsProps) {
                   <TableCell>{account.id}</TableCell>
                   <TableCell>{account.name}</TableCell>
                   <TableCell>{account.balance}</TableCell>
+                  <TableCell>{`${account.user?.firstName} ${account.user?.lastName}`}</TableCell>
                   <TableCell>{account.credit}</TableCell>
+                  <TableCell>{account.currency}</TableCell>
                   <TableCell>{account.server}</TableCell>
                   <TableCell>{account.leverage}</TableCell>
                   <TableCell>
                     {moment(account.dateCreated).format("MMMM DD, YYYY")}
+                  </TableCell>
+                  <TableCell>
+                    <span className="cursor-pointer" onClick={() => onOpenModal(account)}>
+                      <EditIcon />
+                    </span>
                   </TableCell>
                 </TableRow>
               )}
@@ -192,6 +227,27 @@ export default function TradingAccounts({ accounts }: TradingAccountsProps) {
           </Table>
         </>
       )}
+      <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalHeader className="flex flex-col gap-1">
+                Update Trading Account
+              </ModalHeader>
+              <ModalBody>
+                <TradingAccountForm account={tradingAccountToUpdate as TradingAccount} onCloseModal={onClose} />
+              </ModalBody>
+              <ModalFooter>
+                <div className="flex justify-end">
+                  <Button color="danger" variant="light" onPress={onClose}>
+                    Cancel
+                  </Button>
+                </div>
+              </ModalFooter>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
     </>
   );
 }

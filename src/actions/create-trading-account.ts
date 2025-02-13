@@ -7,6 +7,7 @@ import { ActionStateResponse } from "@/models/action-state-response.model";
 import prisma from "../lib/prisma";
 import { TradingAccount } from "@/models/trading-account.model";
 import EmailTemplate from '@/components/EmailTemplate';
+import moment from 'moment';
 
 export async function createTradingAccount(previousState: ActionStateResponse, formData: FormData) {
   const tradingAccountName = formData.get('account-name') as string;
@@ -24,6 +25,7 @@ export async function createTradingAccount(previousState: ActionStateResponse, f
         credit: 0,
         server: 'Live Server',
         leverage: '1:100',
+        dateCreated: moment().format("MM-DD-YYYY HH:mm"),
         user: {
           connect: {
             id: +userId
