@@ -7,7 +7,7 @@ export default function page() {
     <>
       <Banner
         title="Economic calendar"
-        description="We want you to fully enjoy trading, using all opportunities to increase successful operations. For this purpose, Alphabourse provides numerous tools, including the ‘Economic Calendar’."
+        description="We want you to fully enjoy trading, using all opportunities to increase successful operations. For this purpose, Alfabourse provides numerous tools, including the ‘Economic Calendar’."
         img="/economic-calendar-bg.jpg"
       />
       <section className={styles["trading-widget-section"]}>

@@ -6,7 +6,7 @@ export default function page() {
     <>
       <Banner
         title="Technical analysis"
-        description="Find the right points to enter and exit positions. Enlarge your portfolio with promising products that have high liquidity. We at Alphabourse will help you increase your capital."
+        description="Find the right points to enter and exit positions. Enlarge your portfolio with promising products that have high liquidity. We at Alfabourse will help you increase your capital."
         img="/economic-calendar-bg.jpg"
       />
       <section className={styles["widgets-container"]}>

@@ -147,7 +147,7 @@ export default function Home() {
         <div className={clsx("p-0 md:p-10 mt-10", styles["benefits-section"])}>
           <div className={styles["benefits-intro"]}>
             <h3 className="mb-4">OUR BENEFITS</h3>
-            <h1>Alphabourse provides numerous</h1>
+            <h1>Alfabourse provides numerous</h1>
             <h1>opportunities for smart trading</h1>
           </div>
           <div className={styles.benefits}>
@@ -178,7 +178,7 @@ export default function Home() {
         <div className={styles["signup-wrapper"]}>
           <h4>SIGN UP</h4>
           <h1>
-            We are waiting for you at Alphabourse. Trade with a qualified
+            We are waiting for you at Alfabourse. Trade with a qualified
             broker!
           </h1>
           <Link href="/sign-up">

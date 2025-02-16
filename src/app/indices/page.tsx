@@ -1,7 +1,7 @@
 import Banner from "@/shared/Banner";
 import Markets from "@/shared/Markets";
 import React from "react";
-import indicesImg from "../../../public/markets/minimize-risks.png";
+import indicesImg from "../../../public/markets/minimize-risks.jpg";
 import howToStartTradingIndicesImg from "../../../public/markets/how-to-start-trading-indices.jpg";
 
 const textImage = {
@@ -11,7 +11,7 @@ const textImage = {
       Indices are instruments composed of stocks of companies grouped according
       to various criteria. They reflect the overall development of the
       securities&apos; value in a particular group of companies, allowing
-      traders to assess the state and trends of certain market sectors. Essentra
+      traders to assess the state and trends of certain market sectors. Alfabourse
       Finance offers a wide selection of indices from various countries and
       market segments. These instruments can be useful both for market analysis
       and forecasting price changes, as well as for CFD trading.
@@ -29,7 +29,7 @@ function Paragraphs() {
   return (
     <>
       <p>
-        Open a trading account with Alphabourse to gain access to global
+        Open a trading account with Alfabourse to gain access to global
         indices. Our platform offers a wide range of indices from various
         economies, allowing you to select and analyze assets at your discretion.
         Our team of experts is ready to provide assistance and guidance,
@@ -39,7 +39,7 @@ function Paragraphs() {
         Do not limit your investments - open CFD trades on indices of the
         world’s largest giants. This is an excellent way to diversify the
         portfolio and make it more resilient to market fluctuations. Trust
-        Alphabourse for a variety of features and a quality approach to
+        Alfabourse for a variety of features and a quality approach to
         index trading.
       </p>
     </>

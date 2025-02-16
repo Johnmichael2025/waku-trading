@@ -1,7 +1,7 @@
 import Banner from "@/shared/Banner";
 import Markets from "@/shared/Markets";
 import React from "react";
-import commoditiesImg from "../../../public/markets/what-are-commodities.png";
+import commoditiesImg from "../../../public/markets/what-are-commodities.jpg";
 import profitableCommodityTradingImg from "../../../public/markets/profitable-commodity-trading.jpg";
 
 const textImage = {
@@ -35,7 +35,7 @@ function Paragraphs() {
       </p>
       <p>
         Do you want to try your hand at the commodity market, but feel like you
-        need help? On the Alphabourse platform, we provide support for
+        need help? On the Alfabourse platform, we provide support for
         beginners. We understand that in this world, without the right support
         and direction, a start may seem difficult. Our professionals are ready
         to guide you through this process.

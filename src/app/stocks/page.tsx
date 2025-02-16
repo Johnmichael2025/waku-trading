@@ -1,7 +1,7 @@
 import Banner from "@/shared/Banner";
 import Markets from "@/shared/Markets";
 import React from "react";
-import stocksImg from "../../../public/markets/what-are-stocks.png";
+import stocksImg from "../../../public/markets/what-are-stocks.jpg";
 import howToTradeStocksImg from "../../../public/markets/how-to-trade-stocks.jpg";
 
 const textImage = {
@@ -11,7 +11,7 @@ const textImage = {
       Stocks are not just securities, but a way to co-own a company. They open
       up opportunities for investors to receive a share of profits and influence
       important decisions. Shareholders can also expect to receive dividends, a
-      share of profits that the company pays to its shareholders. At Essentra
+      share of profits that the company pays to its shareholders. At Alfabourse
       Finance, we offer a wide range of CFDs on stocks of the world’s leading
       companies.
     </p>
@@ -29,7 +29,7 @@ function Paragraphs() {
     <>
       <p>
         Stock trading requires not only a quality broker, but also a strategy
-        that suits your investment goals. Alphabourse provides optimal
+        that suits your investment goals. Alfabourse provides optimal
         trading conditions and helps you choose the right investment method.{" "}
       </p>
       <p>

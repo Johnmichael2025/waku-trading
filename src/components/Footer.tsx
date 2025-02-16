@@ -3,7 +3,7 @@ import React from "react";
 import styles from "../scss/footer.module.scss";
 import Link from "next/link";
 import Image from "next/image";
-import logoImg from "../../public/logo.webp";
+import logoImg from "../../public/alfabourse-logo.png";
 import clsx from "clsx";
 import { usePathname } from "next/navigation";
 import SociaMediaFloatingIcons from "./SociaMediaFloatingIcons";
@@ -20,7 +20,7 @@ export default function Footer() {
         )}
       >
         <Link href="/" rel="home">
-          <Image width={100} height={50} src={logoImg} alt="Logo" />
+          <Image className="h-[80px]" width={80} height={80} src={logoImg} alt="Logo" />
         </Link>
         <br />
         <p>

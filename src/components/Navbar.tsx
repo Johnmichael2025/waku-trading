@@ -2,7 +2,7 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import styles from "./../scss/Navbar.module.scss";
-import logoImg from "../../public/logo.webp";
+import logoImg from "../../public/alfabourse-logo.png";
 import { NAV_ITEMS } from "../constants/nav-items.constant";
 import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
@@ -49,7 +49,7 @@ export default function Navbar() {
         className="flex md:hidden justify-between p-4"
       >
         <Link href="/" rel="home">
-          <Image width={80} height={80} src={logoImg} alt="Logo" />
+          <Image className="h-[80px]" width={80} height={80} src={logoImg} alt="Logo" />
         </Link>
         <div onClick={onOpen} className="mt-4 mr-2">
           <Image width={40} height={40} src="/menu.png" alt="Menu" />
@@ -76,7 +76,7 @@ export default function Navbar() {
             <div className="col-cell header-logo">
               <div className="logo-area sticky-logo">
                 <Link href="/" rel="home">
-                  <Image width={80} height={50} src={logoImg} alt="Logo" />
+                  <Image className="h-[80px]" width={80} height={80} src={logoImg} alt="Logo" />
                 </Link>
               </div>
             </div>

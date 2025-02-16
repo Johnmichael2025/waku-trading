@@ -1,7 +1,7 @@
 import Banner from "@/shared/Banner";
 import Markets from "@/shared/Markets";
 import React from "react";
-import forexImg from "../../../public/markets/how-forex-works.png";
+import forexImg from "../../../public/markets/how-forex-works.jpg";
 import howToStartForexImg from "../../../public/markets/how-to-start-forex.jpg";
 
 const textImage = {
@@ -30,7 +30,7 @@ function Paragraphs() {
     <>
       <p>
         One of the ways for private traders to get started in the currency
-        market is to collaborate with a reliable broker, such as Essentra
+        market is to collaborate with a reliable broker, such as Alfabourse
         Finance. Our company provides users with the tools and resources
         necessary for confident and effective work in the financial markets.
       </p>

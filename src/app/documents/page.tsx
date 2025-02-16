@@ -14,7 +14,7 @@ export default function page() {
     <>
       <Banner
         title="Legal documents"
-        description="Alphabourse provides detailed information about its terms and conditions. Before cooperating with us, we recommend that you examine this documentation to understand our policies."
+        description="Alfabourse provides detailed information about its terms and conditions. Before cooperating with us, we recommend that you examine this documentation to understand our policies."
         img="/documents/legal-documents.jpg"
       />
       <div className="flex flex-col md:flex-row flex-wrap gap-5 p-5 md:p-10 items-center justify-center">

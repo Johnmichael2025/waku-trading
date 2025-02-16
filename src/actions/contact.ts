@@ -12,7 +12,7 @@ export async function contact(previousState: ActionStateResponse, formData: Form
   try {
     const { data, error } = await resend.emails.send({
       from: 'admin@alfabourse.com',
-      to: ['jovenlin28@gmail.com'],
+      to: ['admin@alfabourse.com'],
       subject: 'Contact Customer Service',
       react: EmailTemplate({ name, message, email }),
     });
