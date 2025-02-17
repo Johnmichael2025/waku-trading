@@ -3,7 +3,7 @@ import { CircularProgressbar } from "react-circular-progressbar";
 import styles from "./statistics.module.scss";
 import { CircularProgressbarStyles } from "react-circular-progressbar/dist/types";
 import Image from "next/image";
-import ProjectImg from "../../../public/home/suitable-accounts.avif";
+import ProjectImg from "../../../public/home/suitable-accounts.jpg";
 import Link from "next/link";
 
 const pieStyles: CircularProgressbarStyles = {
