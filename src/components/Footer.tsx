@@ -3,7 +3,7 @@ import React from "react";
 import styles from "../scss/footer.module.scss";
 import Link from "next/link";
 import Image from "next/image";
-import logoImg from "../../public/alfabourse-logo.png";
+import logoImg from "../../public/alfabourse-logo-no-bg.png";
 import clsx from "clsx";
 import { usePathname } from "next/navigation";
 import SociaMediaFloatingIcons from "./SociaMediaFloatingIcons";
@@ -20,10 +20,10 @@ export default function Footer() {
         )}
       >
         <Link href="/" rel="home">
-          <Image className="h-[80px]" width={80} height={80} src={logoImg} alt="Logo" />
+          <Image className="relative right-5" width={110} height={160} src={logoImg} alt="Logo" />
         </Link>
         <br />
-        <p>
+        <p className="-mt-5">
           Please note that by using this site, you agree to the company&apos;s
           terms and conditions. We also ask you to carefully review the
           Alfabourse policies that govern our provision of services. Trading in

@@ -1,8 +1,8 @@
 .bg-left {
-  background-image: url(https://essentrafinance.com/wp-content/uploads/2023/12/bg1252.jpg);
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  // background-image: url(https://essentrafinance.com/wp-content/uploads/2023/12/bg1252.jpg);
+  // background-position: center center;
+  // background-repeat: no-repeat;
+  // background-size: cover;
   padding: 60px;
 }
 
@@ -17,13 +17,14 @@
 
   & > div:first-child {
     width: 40%;
+    margin-top: 20px;
     h3 {
-      color: #ffffff;
+      color: #000;
     }
     h1 {
       font-size: 32px;
       line-height: 45px;
-      color: #ffffff;
+      color: #000;
     }
   }
   .pie-container {
