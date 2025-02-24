@@ -6,6 +6,7 @@ export async function updateProfile(previousState: ActionStateResponse, formData
   const id = formData.get('user-id') as string;
   const gender = formData.get('gender') as string;
   const language = formData.get('language') as string;
+  const country = formData.get('country') as string;
   const address = formData.get('address') as string;
   const city = formData.get('city') as string;
   const postalCode = formData.get('postal-code') as string;
@@ -20,6 +21,7 @@ export async function updateProfile(previousState: ActionStateResponse, formData
       data: {
         gender,
         language,
+        country,
         address,
         city,
         postalCode,

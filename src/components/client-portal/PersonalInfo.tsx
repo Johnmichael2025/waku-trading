@@ -5,6 +5,7 @@ import styles from "../../scss/client-portal-profile.module.scss";
 import { User } from "@/models/user.model";
 import { updateProfile } from "@/actions/update-profile";
 import { toast, ToastContainer } from "react-toastify";
+import { COUNTRIES } from "@/constants/countries.constant";
 
 type PersonalInfoProps = {
   user: User;
@@ -73,7 +74,7 @@ export default function PersonalInfo({ user }: PersonalInfoProps) {
             <div className="flex-1">
               <h3 className="text-default-500 text-small mb-4">Language</h3>
               <Select
-                defaultSelectedKeys={["english"]}
+                defaultSelectedKeys={[user.language]}
                 className={styles.select}
                 name="language"
                 label="Language"
@@ -99,13 +100,15 @@ export default function PersonalInfo({ user }: PersonalInfoProps) {
             <div className="flex-1">
               <h3 className="text-default-500 text-small mb-4">Country</h3>
               <Select
-                isDisabled
-                defaultSelectedKeys={["PH"]}
+                defaultSelectedKeys={[user.country]}
                 className={styles.select}
                 name="country"
                 label="Country"
               >
-                <SelectItem key="PH">Philippines</SelectItem>
+                {COUNTRIES.map((country) => (
+                    <SelectItem key={country.name}>{country.name}</SelectItem>
+                ))}
+              
               </Select>
             </div>
             <div className="flex-1">
