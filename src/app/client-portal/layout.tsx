@@ -3,6 +3,7 @@ import { CLIENT_PORTAL_NAVIGATION } from "@/constants/client-portal-navigation.c
 import { UserProvider } from "@/providers/UserProvider";
 import { Suspense } from "react";
 
+export const dynamic = 'force-dynamic';
 export default function ClientPortalLayout({
   children,
 }: Readonly<{

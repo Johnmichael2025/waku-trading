@@ -306,7 +306,7 @@ export default function Transactions({
                   </TableCell>
 
                   <TableCell>
-                    {ADMINS.includes(session?.data?.user?.email || "") && (
+                    {ADMINS.includes(session?.data?.user?.email || "") && transaction.status !== TRANSACTION_STATUS.COMPLETED && (
                       <div className="flex gap-2">
                         <Button
                           onPress={() => onOpenModal("approve", transaction)}
