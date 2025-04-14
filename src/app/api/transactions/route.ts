@@ -5,6 +5,7 @@ import { Transaction } from "@/models/transaction.model";
 import { revalidatePath } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
 
+export const revalidate = 0;
 export async function GET() {
   try {
     const transactions = await prisma.transaction.findMany({
